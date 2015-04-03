@@ -36,5 +36,19 @@ def coloredMessage(message, color):
 
 # takes a hash in form of {subject: [count, passed]}
 # and returns [(proportion, subject, count, passed)] sorted by proportion
-def sortedHash(hash):
-  pass
+def sortedHash(counts):
+  by_proportion = []
+
+  for subject in counts.keys():
+    count, passed = counts[subject]
+    if count < 50: continue # we don't care about insubstantial issues (were raised fewer than 50 times in the floors)
+    by_proportion.append((passed/count, subject, passed, count))
+
+  return(sorted(by_proportion))
+
+
+def downloadFiles():
+  # download files
+  os.system("rsync -avz --delete --delete-excluded --exclude **/text-versions/ govtrack.us::govtrackdata/congress/113/bills .")
+  # remove the xml files as we're not looking at them
+  os.system("rm -Rf *.xml")
