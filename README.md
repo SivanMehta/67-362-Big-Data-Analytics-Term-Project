@@ -5,4 +5,4 @@ This project uses data from [here](https://www.govtrack.us/developers/data) to a
 Currently, I am just exploring the data set. Here are some things that I am looking at right now
 * What type of bills get passed?
 * Who is likely to sign a certain bill?
-* What type of bill would theoreticall have the best chance of getting passed?
+* What type of bill would theoretically have the best chance of getting passed?
