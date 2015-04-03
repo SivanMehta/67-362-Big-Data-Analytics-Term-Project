@@ -38,6 +38,4 @@ class Analysis():
                 subjects[subject][1] += 1 if self.feature_dict[bill][-1] else 0
 
         # pprint(subjects)
-        pprint(sortedHash(subjects)[:-10:-1])
-
-Analysis().likelyFeatures()
+        return(sortedHash(subjects)[::-1])
