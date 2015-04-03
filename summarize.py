@@ -15,8 +15,7 @@ class Analysis():
 
             try:
                 self.feature_dict[data["bill_id"]] = data["subjects"] + \
-                                                    [data["status"] == "ENACTED:SIGNED",
-                                                    "VETO" in data["status"] and "OVERRIDE" not in data["status"]]
+                                                    [data["status"] == "ENACTED:SIGNED"]
             except:
                 sys.stdout.flush()
                 sys.stdout.write("\rskipped %d files" % skipped)
