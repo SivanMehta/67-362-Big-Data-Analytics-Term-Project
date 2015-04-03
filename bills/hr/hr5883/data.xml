@@ -1,0 +1,24 @@
+<bill session="113" type="h" number="5883" updated="2015-01-06T11:05:11-05:00">
+  <state datetime="2014-12-11">REFERRED</state>
+  <status>
+    <introduced datetime="2014-12-11"/>
+  </status>
+  <introduced datetime="2014-12-11"/>
+  <titles>
+    <title type="short" as="introduced">Fair Tax for Repatriation Act</title>
+    <title type="official" as="introduced">To lower the federal tax on the earnings of American companies with foreign operations.</title>
+  </titles>
+  <sponsor id="410396"/>
+  <cosponsors/>
+  <actions>
+    <action datetime="2014-12-11" state="REFERRED">
+      <text>Referred to the House Committee on Ways and Means.</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="HSWM" name="House Ways and Means" activity="Referral"/>
+  </committees>
+  <relatedbills/>
+  <subjects/>
+  <amendments/>
+</bill>

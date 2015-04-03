@@ -1,0 +1,35 @@
+<bill session="113" type="h" number="5884" updated="2015-01-06T11:05:11-05:00">
+  <state datetime="2014-12-11">REFERRED</state>
+  <status>
+    <introduced datetime="2014-12-11"/>
+  </status>
+  <introduced datetime="2014-12-11"/>
+  <titles>
+    <title type="short" as="introduced">Don't Track Me Act</title>
+    <title type="official" as="introduced">To prohibit the replacement of the gasoline excise tax with a GPS, location or distance-based tax and for other purposes.</title>
+  </titles>
+  <sponsor id="410396"/>
+  <cosponsors/>
+  <actions>
+    <action datetime="2014-12-11" state="REFERRED">
+      <text>Referred to the Committee on Energy and Commerce, and in addition to the Committees on Ways and Means, and Transportation and Infrastructure, for a period to be subsequently determined by the Speaker, in each case for consideration of such provisions as fall within the jurisdiction of the committee concerned.</text>
+    </action>
+    <action datetime="2014-12-11">
+      <text>Referred to House Energy and Commerce</text>
+    </action>
+    <action datetime="2014-12-11">
+      <text>Referred to House Ways and Means</text>
+    </action>
+    <action datetime="2014-12-11">
+      <text>Referred to House Transportation and Infrastructure</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="HSIF" name="House Energy and Commerce" activity="Referral"/>
+    <committee code="HSWM" name="House Ways and Means" activity="Referral"/>
+    <committee code="HSPW" name="House Transportation and Infrastructure" activity="Referral"/>
+  </committees>
+  <relatedbills/>
+  <subjects/>
+  <amendments/>
+</bill>

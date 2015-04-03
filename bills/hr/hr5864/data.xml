@@ -1,0 +1,24 @@
+<bill session="113" type="h" number="5864" updated="2015-01-06T11:05:01-05:00">
+  <state datetime="2014-12-11">REFERRED</state>
+  <status>
+    <introduced datetime="2014-12-11"/>
+  </status>
+  <introduced datetime="2014-12-11"/>
+  <titles>
+    <title type="short" as="introduced">FPS Improvement Act of 2014</title>
+    <title type="official" as="introduced">To protect Federal employees and visitors, improve the security of Federal facilities, authorize and modernize the Federal Protective Service, and for other purposes.</title>
+  </titles>
+  <sponsor id="412258"/>
+  <cosponsors/>
+  <actions>
+    <action datetime="2014-12-11" state="REFERRED">
+      <text>Referred to the House Committee on Transportation and Infrastructure.</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="HSPW" name="House Transportation and Infrastructure" activity="Referral"/>
+  </committees>
+  <relatedbills/>
+  <subjects/>
+  <amendments/>
+</bill>

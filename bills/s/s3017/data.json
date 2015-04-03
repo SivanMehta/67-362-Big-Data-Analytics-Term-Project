@@ -1,0 +1,70 @@
+{
+  "actions": [
+    {
+      "acted_at": "2014-12-12", 
+      "committees": [
+        "SSEV"
+      ], 
+      "references": [], 
+      "status": "REFERRED", 
+      "text": "Read twice and referred to the Committee on Environment and Public Works.", 
+      "type": "referral"
+    }
+  ], 
+  "amendments": [], 
+  "bill_id": "s3017-113", 
+  "bill_type": "s", 
+  "by_request": false, 
+  "committees": [
+    {
+      "activity": [
+        "referral"
+      ], 
+      "committee": "Senate Environment and Public Works", 
+      "committee_id": "SSEV"
+    }
+  ], 
+  "congress": "113", 
+  "cosponsors": [], 
+  "enacted_as": null, 
+  "history": {
+    "active": false, 
+    "awaiting_signature": false, 
+    "enacted": false, 
+    "vetoed": false
+  }, 
+  "introduced_at": "2014-12-12", 
+  "number": "3017", 
+  "official_title": "A bill to provide a categorical exclusion under the National Environmental Policy Act of 1969 to allow the Director of the Bureau of Land Management and the Chief of the Forest Service to remove Pinyon-Juniper trees to conserve and restore the habitat of the greater sage-grouse.", 
+  "popular_title": null, 
+  "related_bills": [], 
+  "short_title": null, 
+  "sponsor": {
+    "district": null, 
+    "name": "Hatch, Orrin G.", 
+    "state": "UT", 
+    "thomas_id": "01351", 
+    "title": "Sen", 
+    "type": "person"
+  }, 
+  "status": "REFERRED", 
+  "status_at": "2014-12-12", 
+  "subjects": [
+    "Birds", 
+    "Environmental assessment, monitoring, research", 
+    "Environmental protection", 
+    "Forests, forestry, trees", 
+    "Wildlife conservation and habitat protection"
+  ], 
+  "subjects_top_term": "Environmental protection", 
+  "summary": null, 
+  "titles": [
+    {
+      "as": "introduced", 
+      "is_for_portion": false, 
+      "title": "A bill to provide a categorical exclusion under the National Environmental Policy Act of 1969 to allow the Director of the Bureau of Land Management and the Chief of the Forest Service to remove Pinyon-Juniper trees to conserve and restore the habitat of the greater sage-grouse.", 
+      "type": "official"
+    }
+  ], 
+  "updated_at": "2015-01-06T11:38:52-05:00"
+}
