@@ -28,7 +28,6 @@ class Analysis():
     def likelyFeatures(self):
 
         # compile the features into map with {subject: (count, passed)}
-
         subjects = {}
         for bill in self.feature_dict.keys():
             for subject in self.feature_dict[bill][:-1]:
