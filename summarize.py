@@ -1,5 +1,6 @@
 from helpers import *
-import json
+import json, sys
+from pprint import pprint
 
 class Analysis():
     def __init__(self):
@@ -16,12 +17,13 @@ class Analysis():
             except: pass
 
     def populateFeatureDict(self, path = "bills"):
-        print("loading files... ", end = "")
+        print("loading files... ")
         for path, dirs, files in os.walk("bills"):
+            file_count = len(files)
             for data_file in files:
                 if data_file[-4:] == "json":
                     self.loadFile(path + "/" + data_file)
-        print(coloredMessage("Done", "green"))
+        print(coloredMessage("\tDone", "green"))
 
     # attempts to answer the question "what types of bills get passed"
     # by looking at the subjects and seeing what proportion of each get passed
@@ -38,3 +40,5 @@ class Analysis():
 
         # pprint(subjects)
         return(sortedHash(subjects)[::-1])
+
+pprint(Analysis().likelyFeatures())
