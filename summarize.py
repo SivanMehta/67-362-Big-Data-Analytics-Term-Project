@@ -41,4 +41,5 @@ class Analysis():
         # pprint(subjects)
         return(sortedHash(subjects)[::-1])
 
-pprint(Analysis().likelyFeatures())
+if __name__ == '__main__':
+    pprint(Analysis().likelyFeatures())
