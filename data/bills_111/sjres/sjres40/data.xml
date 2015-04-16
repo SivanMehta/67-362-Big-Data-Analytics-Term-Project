@@ -1,0 +1,64 @@
+<bill session="111" type="sj" number="40" updated="2014-12-10T13:54:02-05:00">
+  <state datetime="2010-11-30">ENACTED:SIGNED</state>
+  <status>
+    <unknown datetime="2010-11-30"/>
+  </status>
+  <introduced datetime="2010-11-15"/>
+  <titles>
+    <title type="official" as="introduced">A joint resolution appointing the day for the convening of the first session of the One Hundred Twelfth Congress.</title>
+  </titles>
+  <sponsor id="300082"/>
+  <cosponsors/>
+  <actions>
+    <vote how="by Unanimous Consent" type="vote" datetime="2010-11-15" where="s" result="pass" state="PASS_OVER:SENATE">
+      <text>Introduced in the Senate, read twice, considered, read the third time, and passed without amendment by Unanimous Consent.</text>
+      <reference ref="CR S7909" label="consideration"/>
+      <reference ref="CR S7909" label="text as passed Senate"/>
+      <reference ref="CR S7908" label="text of measure as introduced"/>
+    </vote>
+    <action datetime="2010-11-15T18:53:00-05:00">
+      <text>Received in the House.</text>
+    </action>
+    <action datetime="2010-11-15">
+      <text>Message on Senate action sent to the House.</text>
+    </action>
+    <action datetime="2010-11-15T19:19:00-05:00">
+      <text>Held at the desk.</text>
+    </action>
+    <action datetime="2010-11-17T10:26:00-05:00">
+      <text>Mr. Ellison asked unanimous consent to take from the Speaker's table and consider.</text>
+    </action>
+    <action datetime="2010-11-17T10:26:00-05:00">
+      <text>Considered by unanimous consent.</text>
+      <reference ref="CR H7504" label="consideration"/>
+    </action>
+    <vote how="without objection" type="vote2" datetime="2010-11-17T10:27:00-05:00" where="h" result="pass" state="PASSED:BILL">
+      <text>On passage Passed without objection.</text>
+      <reference ref="CR H7504" label="text"/>
+    </vote>
+    <action datetime="2010-11-17T10:27:00-05:00">
+      <text>Motion to reconsider laid on the table Agreed to without objection.</text>
+    </action>
+    <topresident datetime="2010-11-17">
+      <text>Cleared for White House.</text>
+    </topresident>
+    <topresident datetime="2010-11-19">
+      <text>Presented to President.</text>
+    </topresident>
+    <signed datetime="2010-11-30" state="ENACTED:SIGNED">
+      <text>Signed by President.</text>
+    </signed>
+    <enacted number="111-289" type="public" datetime="2010-11-30">
+      <text>Became Public Law No: 111-289.</text>
+    </enacted>
+  </actions>
+  <committees/>
+  <relatedbills/>
+  <subjects>
+    <term name="Congress"/>
+    <term name="Legislative rules and procedure"/>
+  </subjects>
+  <amendments/>
+  <summary>11/30/2010--Public Law.
+Requires the first regular session of the 112th Congress to begin at noon on Wednesday, January 5, 2011.</summary>
+</bill>

@@ -1,0 +1,30 @@
+<bill session="111" type="hr" number="1643" updated="2014-12-10T13:51:49-05:00">
+  <state datetime="2010-09-22">REFERRED</state>
+  <status>
+    <introduced datetime="2010-09-22"/>
+  </status>
+  <introduced datetime="2010-09-22"/>
+  <titles>
+    <title type="official" as="introduced">Recognizing the 75th anniversary of RadioShack Corporation's original listing as a public company on the New York Stock Exchange.</title>
+  </titles>
+  <sponsor id="400157"/>
+  <cosponsors/>
+  <actions>
+    <action datetime="2010-09-22" state="REFERRED">
+      <text>Referred to the House Committee on Financial Services.</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="HSBA" name="House Financial Services" activity="Referral, In Committee"/>
+  </committees>
+  <relatedbills/>
+  <subjects>
+    <term name="Commerce"/>
+    <term name="Commemorative events and holidays"/>
+    <term name="Corporate finance and management"/>
+    <term name="Retail and wholesale trades"/>
+  </subjects>
+  <amendments/>
+  <summary>9/22/2010--Introduced.
+Recognizes the 75th anniversary of RadioShack Corporation's original listing as a public company on the New York Stock Exchange.</summary>
+</bill>

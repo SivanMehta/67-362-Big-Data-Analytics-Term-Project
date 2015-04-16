@@ -1,0 +1,84 @@
+<bill session="111" type="h" number="6200" updated="2014-12-10T13:53:50-05:00">
+  <state datetime="2010-10-13">ENACTED:SIGNED</state>
+  <status>
+    <unknown datetime="2010-10-13"/>
+  </status>
+  <introduced datetime="2010-09-23"/>
+  <titles>
+    <title type="short" as="introduced">WIPA and PABSS Extension Act of 2010</title>
+    <title type="short" as="passed house">WIPA and PABSS Extension Act of 2010</title>
+    <title type="short" as="passed senate">WIPA and PABSS Extension Act of 2010</title>
+    <title type="short" as="enacted">WIPA and PABSS Extension Act of 2010</title>
+    <title type="official" as="introduced">To amend part A of title XI of the Social Security Act to provide for a 1-year extension of the authorizations for the Work Incentives Planning and Assistance program and the Protection and Advocacy for Beneficiaries of Social Security program.</title>
+  </titles>
+  <sponsor id="400323"/>
+  <cosponsors>
+    <cosponsor id="400206" joined="2010-09-23"/>
+    <cosponsor id="400262" joined="2010-09-23"/>
+  </cosponsors>
+  <actions>
+    <action datetime="2010-09-23">
+      <text>Sponsor introductory remarks on measure.</text>
+      <reference ref="CR E1729"/>
+    </action>
+    <action datetime="2010-09-23" state="REFERRED">
+      <text>Referred to the House Committee on Ways and Means.</text>
+    </action>
+    <action datetime="2010-09-28">
+      <text>Received in the Senate, read twice.</text>
+    </action>
+    <action datetime="2010-09-28T17:00:00-04:00">
+      <text>Mr. Tanner moved to suspend the rules and pass the bill.</text>
+    </action>
+    <action datetime="2010-09-28T17:00:00-04:00">
+      <text>Considered under suspension of the rules.</text>
+      <reference ref="CR H7063-7064" label="consideration"/>
+    </action>
+    <action datetime="2010-09-28T17:00:00-04:00">
+      <text>DEBATE - The House proceeded with forty minutes of debate on H.R. 6200.</text>
+    </action>
+    <vote how="by voice vote" type="vote" datetime="2010-09-28T17:02:00-04:00" where="h" result="pass" state="PASS_OVER:HOUSE">
+      <text>On motion to suspend the rules and pass the bill Agreed to by voice vote.</text>
+      <reference ref="CR H7063-7064" label="text"/>
+    </vote>
+    <action datetime="2010-09-28T17:02:00-04:00">
+      <text>Motion to reconsider laid on the table Agreed to without objection.</text>
+    </action>
+    <vote how="by Unanimous Consent" type="vote2" datetime="2010-09-29" where="s" result="pass" state="PASSED:BILL">
+      <text>Passed Senate without amendment by Unanimous Consent.</text>
+      <reference ref="CR S7763" label="consideration"/>
+    </vote>
+    <topresident datetime="2010-09-29">
+      <text>Cleared for White House.</text>
+    </topresident>
+    <action datetime="2010-09-30">
+      <text>Message on Senate action sent to the House.</text>
+    </action>
+    <topresident datetime="2010-10-01">
+      <text>Presented to President.</text>
+    </topresident>
+    <signed datetime="2010-10-13" state="ENACTED:SIGNED">
+      <text>Signed by President.</text>
+    </signed>
+    <enacted number="111-280" type="public" datetime="2010-10-13">
+      <text>Became Public Law No: 111-280.</text>
+    </enacted>
+  </actions>
+  <committees>
+    <committee code="HSWM" name="House Ways and Means" activity="Referral"/>
+  </committees>
+  <relatedbills/>
+  <subjects>
+    <term name="Social welfare"/>
+    <term name="Disability assistance"/>
+    <term name="Employment and training programs"/>
+    <term name="Social security and elderly assistance"/>
+  </subjects>
+  <amendments/>
+  <summary>10/13/2010--Public Law.
+(This measure has not been amended since it was introduced. The summary of that version is repeated here.) WIPA and PABSS Extension Act of 2010 - Amends part A of title XI of the Social Security Act to extend through FY2011 the authorization of appropriations for the Work Incentives Planning and Assistance (WIPA) program and the Protection and Advocacy for Beneficiaries of Social Security (PABSS) Program.
+
+Requires each entity awarded a grant, cooperative agreement, or contract under the WIPA Program to report annually to the Commissioner of Social Security on the benefits planning and assistance provided to individuals under such grant, agreement, or contract.
+
+Requires up to 10% of the total amount obligated through a grant, cooperative agreement, or contract awarded under the WIPA Program for a fiscal year to a state, private agency, or organization to remain available until the end of the succeeding fiscal year. Limits the extended availability of such amount, however, to benefits planning and assistance only for individuals who are within the grant, agreement, or contract recipient's caseload as of immediately before the beginning of such fiscal year.</summary>
+</bill>
