@@ -1,0 +1,36 @@
+<bill session="111" type="sc" number="64" updated="2014-12-10T13:54:10-05:00">
+  <state datetime="2010-05-27">REFERRED</state>
+  <status>
+    <introduced datetime="2010-05-27"/>
+  </status>
+  <introduced datetime="2010-05-27"/>
+  <titles>
+    <title type="official" as="introduced">A concurrent resolution honoring the 28th Infantry Division for serving and protecting the United States.</title>
+  </titles>
+  <sponsor id="412246"/>
+  <cosponsors>
+    <cosponsor id="300092" joined="2010-05-27"/>
+  </cosponsors>
+  <actions>
+    <action datetime="2010-05-27" state="REFERRED">
+      <text>Referred to the Committee on Armed Services.</text>
+      <reference ref="CR S4556" label="text of measure as introduced"/>
+    </action>
+  </actions>
+  <committees>
+    <committee code="SSAS" name="Senate Armed Services" activity="Referral, In Committee"/>
+  </committees>
+  <relatedbills>
+    <bill relation="identical" session="111" type="hc" number="283"/>
+    <bill relation="identical" session="111" type="sc" number="74"/>
+  </relatedbills>
+  <subjects>
+    <term name="Armed forces and national security"/>
+    <term name="Congressional tributes"/>
+    <term name="National Guard and reserves"/>
+    <term name="Pennsylvania"/>
+  </subjects>
+  <amendments/>
+  <summary>5/27/2010--Introduced.
+Honors the 28th Infantry Division of the U.S. Army (part of the Pennsylvania Army National Guard) for serving and protecting the United States.</summary>
+</bill>

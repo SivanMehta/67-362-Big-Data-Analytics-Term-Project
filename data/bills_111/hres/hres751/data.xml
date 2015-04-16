@@ -1,0 +1,35 @@
+<bill session="111" type="hr" number="751" updated="2014-12-10T13:51:34-05:00">
+  <state datetime="2009-09-17">REFERRED</state>
+  <status>
+    <introduced datetime="2009-09-17"/>
+  </status>
+  <introduced datetime="2009-09-17"/>
+  <titles>
+    <title type="official" as="introduced">Encouraging States to adopt laws that set clear guidelines for contact protocols for personal emergency response systems used by the Nation's senior citizens.</title>
+  </titles>
+  <sponsor id="400442"/>
+  <cosponsors/>
+  <actions>
+    <action datetime="2009-09-17" state="REFERRED">
+      <text>Referred to the House Committee on Energy and Commerce.</text>
+    </action>
+    <action datetime="2009-09-21">
+      <text>Referred to the Subcommittee on Health.</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="HSIF" name="House Energy and Commerce" activity="Referral, In Committee"/>
+    <committee activity="Referral" code="HSIF14" subcommittee="Health" name="House Energy and Commerce"/>
+  </committees>
+  <relatedbills/>
+  <subjects>
+    <term name="Health"/>
+    <term name="Aging"/>
+    <term name="Emergency communications systems"/>
+    <term name="Emergency medical services and trauma care"/>
+    <term name="State and local government operations"/>
+  </subjects>
+  <amendments/>
+  <summary>9/17/2009--Introduced.
+Calls for states to adopt laws that set clear guidelines for contact protocols for personal emergency response systems used by senior citizens.</summary>
+</bill>

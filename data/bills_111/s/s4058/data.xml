@@ -1,0 +1,73 @@
+<bill session="111" type="s" number="4058" updated="2014-12-10T13:55:02-05:00">
+  <state datetime="2010-12-29">ENACTED:SIGNED</state>
+  <status>
+    <unknown datetime="2010-12-29"/>
+  </status>
+  <introduced datetime="2010-12-22"/>
+  <titles>
+    <title type="short" as="introduced">Helping Heroes Keep Their Homes Act of 2010</title>
+    <title type="short" as="passed house">Helping Heroes Keep Their Homes Act of 2010</title>
+    <title type="short" as="passed senate">Helping Heroes Keep Their Homes Act of 2010</title>
+    <title type="short" as="enacted">Helping Heroes Keep Their Homes Act of 2010</title>
+    <title type="official" as="introduced">A bill to extend certain expiring provisions providing enhanced protections for servicemembers relating to mortgages and mortgage foreclosure.</title>
+  </titles>
+  <sponsor id="300060"/>
+  <cosponsors/>
+  <actions>
+    <vote how="by Unanimous Consent" type="vote" datetime="2010-12-22" where="s" result="pass" state="PASS_OVER:SENATE">
+      <text>Introduced in the Senate, read twice, considered, read the third time, and passed without amendment by Unanimous Consent.</text>
+      <reference ref="CR S10990" label="consideration"/>
+      <reference ref="CR S10990" label="text as passed Senate"/>
+    </vote>
+    <action datetime="2010-12-22T16:10:00-05:00">
+      <text>Received in the House.</text>
+    </action>
+    <action datetime="2010-12-22T16:16:00-05:00">
+      <text>Held at the desk.</text>
+    </action>
+    <action datetime="2010-12-22">
+      <text>Message on Senate action sent to the House.</text>
+    </action>
+    <action datetime="2010-12-22T17:46:00-05:00">
+      <text>Mr. Perriello asked unanimous consent to take from the Speaker's table and consider.</text>
+    </action>
+    <action datetime="2010-12-22T17:46:00-05:00">
+      <text>Considered by unanimous consent.</text>
+      <reference ref="CR H8980" label="consideration"/>
+    </action>
+    <vote how="without objection" type="vote2" datetime="2010-12-22T17:46:00-05:00" where="h" result="pass" state="PASSED:BILL">
+      <text>On passage Passed without objection.</text>
+      <reference ref="CR H8980" label="text"/>
+    </vote>
+    <action datetime="2010-12-22T17:46:00-05:00">
+      <text>Motion to reconsider laid on the table Agreed to without objection.</text>
+    </action>
+    <topresident datetime="2010-12-22">
+      <text>Cleared for White House.</text>
+    </topresident>
+    <topresident datetime="2010-12-23">
+      <text>Presented to President.</text>
+    </topresident>
+    <signed datetime="2010-12-29" state="ENACTED:SIGNED">
+      <text>Signed by President.</text>
+    </signed>
+    <enacted number="111-346" type="public" datetime="2010-12-29">
+      <text>Became Public Law No: 111-346.</text>
+    </enacted>
+  </actions>
+  <committees/>
+  <relatedbills>
+    <bill relation="unknown" session="111" type="h" number="3976"/>
+    <bill relation="unknown" session="111" type="h" number="3976"/>
+  </relatedbills>
+  <subjects>
+    <term name="Armed forces and national security"/>
+    <term name="Housing finance and home ownership"/>
+    <term name="Veterans' loans, housing, homeless programs"/>
+  </subjects>
+  <amendments/>
+  <summary>12/29/2010--Public Law.
+(This measure has not been amended since it was introduced. The summary of that version is repeated here.)
+
+Helping Heroes Keep Their Homes Act of 2010 - Amends the Housing and Economic Recovery Act of 2008 to extend through December 31, 2012, a specified protection for servicemembers against mortgage foreclosure, maintaining through such date the stay of proceedings period of 9 months (instead of 90 days, as under previous law).</summary>
+</bill>

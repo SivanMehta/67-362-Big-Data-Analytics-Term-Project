@@ -1,0 +1,38 @@
+<bill session="111" type="hr" number="468" updated="2014-12-10T13:51:28-05:00">
+  <state datetime="2009-05-20">REFERRED</state>
+  <status>
+    <introduced datetime="2009-05-20"/>
+  </status>
+  <introduced datetime="2009-05-20"/>
+  <titles>
+    <title type="official" as="introduced">Supporting the designation of National Tourette Syndrome Day.</title>
+  </titles>
+  <sponsor id="412186"/>
+  <cosponsors>
+    <cosponsor id="400312" joined="2009-07-08"/>
+  </cosponsors>
+  <actions>
+    <action datetime="2009-05-20" state="REFERRED">
+      <text>Referred to the House Committee on Energy and Commerce.</text>
+    </action>
+    <action datetime="2009-05-21">
+      <text>Referred to the Subcommittee on Health.</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="HSIF" name="House Energy and Commerce" activity="Referral, In Committee"/>
+    <committee activity="Referral" code="HSIF14" subcommittee="Health" name="House Energy and Commerce"/>
+  </committees>
+  <relatedbills/>
+  <subjects>
+    <term name="Health"/>
+    <term name="Commemorative events and holidays"/>
+    <term name="Congressional tributes"/>
+    <term name="Neurological disorders"/>
+  </subjects>
+  <amendments/>
+  <summary>5/20/2009--Introduced.
+Expresses support for the designation of National Tourette Syndrome Day.
+
+Recognizes the accomplishments of those who work to increase awareness of Tourette Syndrome.</summary>
+</bill>

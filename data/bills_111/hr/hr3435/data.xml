@@ -1,0 +1,98 @@
+<bill session="111" type="h" number="3435" updated="2014-12-10T13:53:03-05:00">
+  <state datetime="2009-08-07">ENACTED:SIGNED</state>
+  <status>
+    <unknown datetime="2009-08-07"/>
+  </status>
+  <introduced datetime="2009-07-31"/>
+  <titles>
+    <title type="official" as="introduced">Making supplemental appropriations for fiscal year 2009 for the Consumer Assistance to Recycle and Save Program.</title>
+  </titles>
+  <sponsor id="400300"/>
+  <cosponsors>
+    <cosponsor id="412208" joined="2009-07-31"/>
+    <cosponsor id="400442" joined="2009-07-31"/>
+    <cosponsor id="400195" joined="2009-07-31"/>
+    <cosponsor id="400216" joined="2009-07-31"/>
+    <cosponsor id="412228" joined="2009-07-31"/>
+  </cosponsors>
+  <actions>
+    <action datetime="2009-07-31T12:13:00-04:00">
+      <text>Mr. Obey moved to suspend the rules and pass the bill.</text>
+    </action>
+    <action datetime="2009-07-31T12:13:00-04:00">
+      <text>Considered under suspension of the rules.</text>
+      <reference ref="CR H9233-9240" label="consideration"/>
+    </action>
+    <action datetime="2009-07-31T12:13:00-04:00">
+      <text>DEBATE - The House proceeded with forty minutes of debate on H.R. 3435.</text>
+    </action>
+    <vote how="roll" type="vote" roll="682" datetime="2009-07-31T13:25:00-04:00" where="h" result="pass" suspension="1" state="PASS_OVER:HOUSE">
+      <text>On motion to suspend the rules and pass the bill Agreed to by the Yeas and Nays: (2/3 required): 316 - 109, 2 Present (Roll no. 682).</text>
+      <reference ref="CR H9233-9234" label="text"/>
+    </vote>
+    <action datetime="2009-07-31T13:25:00-04:00">
+      <text>Motion to reconsider laid on the table Agreed to without objection.</text>
+    </action>
+    <action datetime="2009-08-03">
+      <text>Received in the Senate. Read the first time. Placed on Senate Legislative Calendar under Read the First Time.</text>
+    </action>
+    <calendar datetime="2009-08-04" calendar="Senate Legislative" under="General Orders" number="146">
+      <text>Read the second time. Placed on Senate Legislative Calendar under General Orders. Calendar No. 146.</text>
+    </calendar>
+    <action datetime="2009-08-06">
+      <text>Measure laid before Senate by unanimous consent.</text>
+      <reference ref="CR S8946-8967" label="consideration"/>
+    </action>
+    <action datetime="2009-08-06">
+      <text>Point of order that an emergency designation within the measure violates the CBA raised in Senate.</text>
+    </action>
+    <action datetime="2009-08-06">
+      <text>Motion to waive the Budget Act with respect to the measure (the section within the measure regarding an emergency designation) agreed to in Senate by Yea-Nay Vote. 60 - 37. Record Vote Number: 269.</text>
+    </action>
+    <vote how="roll" type="vote2" roll="270" datetime="2009-08-06" where="s" result="pass" state="PASSED:BILL">
+      <text>Passed Senate without amendment by Yea-Nay Vote. 60 - 37. Record Vote Number: 270.</text>
+    </vote>
+    <action datetime="2009-08-06">
+      <text>Message on Senate action sent to the House.</text>
+    </action>
+    <topresident datetime="2009-08-06">
+      <text>Cleared for White House.</text>
+    </topresident>
+    <topresident datetime="2009-08-06">
+      <text>Presented to President.</text>
+    </topresident>
+    <signed datetime="2009-08-07" state="ENACTED:SIGNED">
+      <text>Signed by President.</text>
+    </signed>
+    <enacted number="111-47" type="public" datetime="2009-08-07">
+      <text>Became Public Law No: 111-47.</text>
+    </enacted>
+  </actions>
+  <committees/>
+  <relatedbills/>
+  <subjects>
+    <term name="Transportation and public works"/>
+    <term name="Appropriations"/>
+    <term name="Congressional oversight"/>
+    <term name="Department of Transportation"/>
+    <term name="Energy efficiency and conservation"/>
+    <term name="Executive agency funding and structure"/>
+    <term name="Government studies and investigations"/>
+    <term name="Motor vehicles"/>
+  </subjects>
+  <amendments>
+    <amendment number="s2298"/>
+    <amendment number="s2299"/>
+    <amendment number="s2300"/>
+    <amendment number="s2301"/>
+    <amendment number="s2302"/>
+    <amendment number="s2303"/>
+    <amendment number="s2304"/>
+    <amendment number="s2305"/>
+    <amendment number="s2306"/>
+  </amendments>
+  <summary>8/7/2009--Public Law.
+Makes emergency supplemental appropriations of $2 billion for FY2009 and FY2010 to the National Highway Traffic Safety Administration (NHTSA) of the Department of Transportation (DOT) for the Consumer Assistance to Recycle and Save Program (Cash for Clunkers Program).
+
+Amends the Consumer Assistance to Recycle and Save Program to require the Government Accountability Office (GAO) and the DOT Inspector General to review and report to Congress on the administration of the program.</summary>
+</bill>

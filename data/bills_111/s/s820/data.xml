@@ -1,0 +1,34 @@
+<bill session="111" type="s" number="820" updated="2014-12-10T13:54:26-05:00">
+  <state datetime="2009-04-02">REFERRED</state>
+  <status>
+    <introduced datetime="2009-04-02"/>
+  </status>
+  <introduced datetime="2009-04-02"/>
+  <titles>
+    <title type="short" as="introduced">Veterans Mobility Enhancement Act of 2009</title>
+    <title type="official" as="introduced">A bill to amend title 38, United States Code, to enhance the automobile assistance allowance for veterans, and for other purposes.</title>
+  </titles>
+  <sponsor id="400357"/>
+  <cosponsors/>
+  <actions>
+    <action datetime="2009-04-02" state="REFERRED">
+      <text>Read twice and referred to the Committee on Veterans' Affairs.</text>
+    </action>
+    <action datetime="2009-04-29">
+      <text>Committee on Veterans' Affairs. Hearings held.</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="SSVA" name="Senate Veterans' Affairs" activity="Referral, Hearings, In Committee"/>
+  </committees>
+  <relatedbills/>
+  <subjects>
+    <term name="Armed forces and national security"/>
+    <term name="Disability and paralysis"/>
+    <term name="Motor vehicles"/>
+    <term name="Veterans' education, employment, rehabilitation"/>
+  </subjects>
+  <amendments/>
+  <summary>4/2/2009--Introduced.
+Veterans Mobility Enhancement Act of 2009 - Increases from $11,000 to $22,500 the amount authorized to be provided by the Department of Veterans Affairs (VA) to certain disabled veterans for the purchase of an automobile and any necessary adaptive equipment.</summary>
+</bill>

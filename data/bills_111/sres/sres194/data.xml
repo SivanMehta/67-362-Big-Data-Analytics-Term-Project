@@ -1,0 +1,37 @@
+<bill session="111" type="sr" number="194" updated="2014-12-10T13:54:04-05:00">
+  <state datetime="2009-06-19">PASSED:SIMPLERES</state>
+  <status>
+    <unknown datetime="2009-06-19"/>
+  </status>
+  <introduced datetime="2009-06-19"/>
+  <titles>
+    <title type="official" as="introduced">A resolution congratulating the Pittsburgh Penguins on winning the 2009 Stanley Cup Championship.</title>
+  </titles>
+  <sponsor id="412246"/>
+  <cosponsors>
+    <cosponsor id="300092" joined="2009-06-19"/>
+  </cosponsors>
+  <actions>
+    <vote how="by Unanimous Consent" type="vote" datetime="2009-06-19" where="s" result="pass" state="PASSED:SIMPLERES">
+      <text>Submitted in the Senate, considered, and agreed to without amendment and with a preamble by Unanimous Consent.</text>
+      <reference ref="CR S6832-6833" label="consideration"/>
+      <reference ref="CR S6832-6833" label="text as passed Senate"/>
+      <reference ref="CR S6848-6849" label="text of measure as introduced"/>
+    </vote>
+  </actions>
+  <committees/>
+  <relatedbills>
+    <bill relation="unknown" session="111" type="hr" number="594"/>
+  </relatedbills>
+  <subjects>
+    <term name="Sports and recreation"/>
+    <term name="Athletes"/>
+    <term name="Congressional tributes"/>
+    <term name="Michigan"/>
+    <term name="Pennsylvania"/>
+    <term name="Professional sports"/>
+  </subjects>
+  <amendments/>
+  <summary>6/19/2009--Introduced.
+Congratulates: (1) the Pittsburgh Penguins for winning the 2009 Stanley Cup Championship; and (2) the Detroit Red Wings on an outstanding season.</summary>
+</bill>

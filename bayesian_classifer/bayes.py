@@ -119,20 +119,23 @@ def getFeatures(billPath):
         try:
             # feature_dict[data["bill_id"]] = data["subjects"] + [data["status"]]
             status = data["status"]
+
             for subject in data["subjects"]:
-                feature_dict[subject] = data["status"]
+                feature_dict[subject] = status
+            feature_dict[data["bill_type"]] = status
+            feature_dict[data["sponsor"]["name"]] = status
         except: pass
 
     return feature_dict, status
 
 def trainFeatureDict(predictor, proportion = 1.0):
     i = 1
-    for path, dirs, files in os.walk("bills"):
+    for path, dirs, files in os.walk("data"):
         for data_file in files:
             if ".json" in data_file:
             # we only want to read the .json files because we don't want to read the same data twice
                 sys.stdout.flush()
-                sys.stdout.write("\rtrained %d/%d... " % (i + 1, 21840))
+                sys.stdout.write("\rtrained %d/%d bills... " % (i + 1, 73788))
                 predictor.train(path + "/" + data_file)
             i += 1
     print("done!")
@@ -141,5 +144,5 @@ def trainFeatureDict(predictor, proportion = 1.0):
 congressional_predictor = naivebayes(getFeatures)
 trainFeatureDict(congressional_predictor)
 
-# pprint(congressional_predictor.classify("bills/hconres/hconres1/data.json"))
-pprint(congressional_predictor.fc)
+pprint(congressional_predictor.classify("data/bills_113/hconres/hconres1/data.json"))
+# pprint(congressional_predictor.fc)

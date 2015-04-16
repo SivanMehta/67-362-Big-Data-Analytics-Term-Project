@@ -49,6 +49,4 @@ def sortedHash(counts):
 
 def downloadFiles():
   # download files
-  os.system("rsync -avz --delete --delete-excluded --exclude **/text-versions/ govtrack.us::govtrackdata/congress/113/bills .")
-  # remove the xml files as we're not looking at them
-  os.system("rm -Rf *.xml")
+  os.system("rsync -avz --delete --delete-excluded --exclude **/text-versions/ govtrack.us::govtrackdata/congress/111/bills data")

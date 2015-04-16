@@ -1,0 +1,28 @@
+<bill session="111" type="h" number="1773" updated="2014-12-10T13:52:34-05:00">
+  <state datetime="2009-03-26">REFERRED</state>
+  <status>
+    <introduced datetime="2009-03-26"/>
+  </status>
+  <introduced datetime="2009-03-26"/>
+  <titles>
+    <title type="short" as="introduced">Valerie Plame Wilson Compensation Act</title>
+    <title type="official" as="introduced">For the relief of Valerie Plame Wilson.</title>
+  </titles>
+  <sponsor id="400193"/>
+  <cosponsors/>
+  <actions>
+    <action datetime="2009-03-26" state="REFERRED">
+      <text>Referred to the House Committee on Intelligence (Permanent Select).</text>
+    </action>
+  </actions>
+  <committees>
+    <committee code="HLIG" name="House Intelligence (Permanent Select)" activity="Referral, In Committee"/>
+  </committees>
+  <relatedbills/>
+  <subjects>
+    <term name="Private legislation"/>
+  </subjects>
+  <amendments/>
+  <summary>3/26/2009--Introduced.
+Provides for the relief of Valerie Plame Wilson.</summary>
+</bill>
