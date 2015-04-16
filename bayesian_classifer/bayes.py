@@ -40,14 +40,14 @@ class classifier:
     def categories(self):
         return self.cc.keys()
 
-    def train(self,item,cat):
-        features = self.getfeatures(item)
+    def train(self,item):
+        features, cat = self.getfeatures(item)
         # Increment the count for every feature with this category
         for f in features:
             self.incf(f,cat)
 
       # Increment the count for this category
-          self.incc(cat)
+        self.incc(cat)
 
     def fprob(self,f,cat):
         if self.catcount(cat)==0: return 0
@@ -95,7 +95,7 @@ class naivebayes(classifier):
 
     def classify(self,item,default = None):
         probs={}
-    # Find the category with the highest probability
+        # Find the category with the highest probability
 
         max = 0.0
         for cat in self.categories():
@@ -107,3 +107,36 @@ class naivebayes(classifier):
           if cat==best: continue
           if probs[cat]*self.getthreshold(best)>probs[best]: return default
         return best
+
+# takes a path to a bill and creates a dictionary that maps a feature to it's value
+# in this case we are just going to map a feature to 1
+def getFeatures(billPath):
+    feature_dict = {}
+    status = ""
+    with open(billPath) as data_file:
+        data = json.load(data_file)
+
+        try:
+            # feature_dict[data["bill_id"]] = data["subjects"] + [data["status"]]
+            status = data["status"]
+            for subject in data["subjects"]:
+                feature_dict[subject] = data["status"]
+        except: pass
+
+    return feature_dict, status
+
+def populateFeatureDict(predictor, path = "bills"):
+    i = 1
+    for path, dirs, files in os.walk("bills"):
+        for data_file in files:
+            if data_file[-4:] == "json":
+                sys.stdout.flush()
+                sys.stdout.write("\rtrained %d/%d... " % (i + 1, 21840))
+                predictor.train(path + "/" + data_file)
+            i += 1
+
+
+congressional_predictor = naivebayes(getFeatures)
+populateFeatureDict(congressional_predictor)
+
+pprint(congressional_predictor.classify("bills/hconres/hconres1/data.json"))
