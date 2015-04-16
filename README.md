@@ -7,7 +7,7 @@ Currently, I am just exploring the data set. Here are some things that I am look
 * Who is likely to sign a certain bill?
 * What type of bill would theoretically have the best chance of getting passed?
 
-As of right now, you can some preliminary data exploration by running one of the two following commands:
+As of right now, you can do some preliminary data exploration by running one of the two following commands:
 
 ```bash
 python summarize.py
