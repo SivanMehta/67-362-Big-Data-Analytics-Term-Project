@@ -74,7 +74,7 @@ class naivebayes(classifier):
         self.thresholds={}
 
     def docprob(self,item,cat):
-        features = self.getfeatures(item)   
+        features = self.getfeatures(item)[0]
 
         # Multiply the probabilities of all the features together
         p = 1
@@ -134,9 +134,17 @@ def populateFeatureDict(predictor, path = "bills"):
                 sys.stdout.write("\rtrained %d/%d... " % (i + 1, 21840))
                 predictor.train(path + "/" + data_file)
             i += 1
+    print("done!")
 
 
 congressional_predictor = naivebayes(getFeatures)
 populateFeatureDict(congressional_predictor)
 
-pprint(congressional_predictor.classify("bills/hconres/hconres1/data.json"))
+# pprint(congressional_predictor.classify("bills/hconres/hconres1/data.json"))
+
+# pprint(congressional_predictor.fc)
+# pprint(congressional_predictor.cc.keys())
+
+# f = getFeatures("bills/hconres/hconres1/data.json")
+# for x in f:
+#     print(f)
