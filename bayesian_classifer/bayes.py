@@ -114,55 +114,58 @@ class naivebayes(classifier):
 # 3. passed in first branch
 # 4. brought to a vote
 # 5. not brought to a vote
-def process_states(status):
-    if   status == "INTRODUCED":
-        return 5
-    elif status == "REFERRED":
-        return 5
-    elif status == "REPORTED":
-        return 5
-    elif status == "PROV_KILL:SUSPENSIONFAILED":
-        return 4
-    elif status == "PROV_KILL:CLOTUREFAILED":
-        return 4
-    elif status == "FAIL:ORIGINATING:HOUSE":
-        return 4
-    elif status == "FAIL:ORIGINATING:SENATE":
-        return 4
-    elif status == "PASSED:SIMPLERES":
-        return 3
-    elif status == "PASSED:CONSTAMEND": # amendments don't go to president, they go to states
-        return 2
-    elif status == "PASS_OVER:HOUSE":
-        return 3
-    elif status == "PASS_OVER:SENATE":
-        return 3
-    elif status == "PASSED:CONCURRENTRES":
-        return 2
-    elif status == "FAIL:SECOND:HOUSE":
-        return 3
-    elif status == "FAIL:SECOND:SENATE":
-        return 3
-    elif status == "PASS_BACK:HOUSE":
-        return 2
-    elif status == "PASS_BACK:SENATE":
-        return 2
-    elif status == "PROV_KILL:PINGPONGFAIL":
-        return 3
-    elif status == "PASSED:BILL":
-        return 2
-    elif status == "CONFERENCE:PASSED:HOUSE":
-        return 2
-    elif status == "CONFERENCE:PASSED:SENATE":
-        return 2
-    elif status == "ENACTED:SIGNED":
-        return 1
-    elif status == "ENACTED:VETO_OVERRIDE":
-        return 1
-    elif status == "ENACTED:TENDAYRULE":
-        return 1
-    else:
-        return 2 # all remaining cases are failed vetoes
+# def process_states(status):
+#     if   status == "INTRODUCED":
+#         return 5
+#     elif status == "REFERRED":
+#         return 5
+#     elif status == "REPORTED":
+#         return 5
+#     elif status == "PROV_KILL:SUSPENSIONFAILED":
+#         return 4
+#     elif status == "PROV_KILL:CLOTUREFAILED":
+#         return 4
+#     elif status == "FAIL:ORIGINATING:HOUSE":
+#         return 4
+#     elif status == "FAIL:ORIGINATING:SENATE":
+#         return 4
+#     elif status == "PASSED:SIMPLERES":
+#         return 3
+#     elif status == "PASSED:CONSTAMEND": # amendments don't go to president, they go to states
+#         return 2
+#     elif status == "PASS_OVER:HOUSE":
+#         return 3
+#     elif status == "PASS_OVER:SENATE":
+#         return 3
+#     elif status == "PASSED:CONCURRENTRES":
+#         return 2
+#     elif status == "FAIL:SECOND:HOUSE":
+#         return 3
+#     elif status == "FAIL:SECOND:SENATE":
+#         return 3
+#     elif status == "PASS_BACK:HOUSE":
+#         return 2
+#     elif status == "PASS_BACK:SENATE":
+#         return 2
+#     elif status == "PROV_KILL:PINGPONGFAIL":
+#         return 3
+#     elif status == "PASSED:BILL":
+#         return 2
+#     elif status == "CONFERENCE:PASSED:HOUSE":
+#         return 2
+#     elif status == "CONFERENCE:PASSED:SENATE":
+#         return 2
+#     elif status == "ENACTED:SIGNED":
+#         return 1
+#     elif status == "ENACTED:VETO_OVERRIDE":
+#         return 1
+#     elif status == "ENACTED:TENDAYRULE":
+#         return 1
+#     else:
+#         return 2 # all remaining cases are failed vetoes
+
+def process_states_simple(status):
+    return 1 if "ENACTED" in status else 0
 
 # takes a path to a bill and creates a dictionary that maps a feature to it's value
 # in this case we are just going to map a feature to 1
@@ -174,7 +177,7 @@ def getFeatures(billPath):
 
         try:
             # feature_dict[data["bill_id"]] = data["subjects"] + [data["status"]]
-            status = process_states(data["status"])
+            status = process_states_simple(data["status"])
 
             for subject in data["subjects"]:
                 feature_dict[subject] = status
@@ -219,16 +222,16 @@ def predictOutcomes(predictor):
             bill += 1
 
             actual = getFeatures(path + "/" + data_file)[1]
-            predicted = predictor.classify(path + "/" + data_file)
+            predicted = 0 if predictor.classify(path + "/" + data_file) else 1
 
-            outcomes[0] += 1 if actual == predicted else 0
-            outcomes[1] =+ 1
+            outcomes[0] += 1 if (actual == predicted) else 0
+            outcomes[1] += 1
 
             sys.stdout.flush()
             sys.stdout.write("\r\tclassified bill %d/%d" % (bill, bill_count))
     
     print("\nDone!")
-    print("Accuracy --> %.2f%%" % (outcomes[0]/outcomes[1]))
+    print("Accuracy --> %.5f%% for %d bills" % (100*outcomes[0]/outcomes[1], outcomes[1]))
 
 start = time.time()
 congressional_predictor = naivebayes(getFeatures)
