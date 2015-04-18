@@ -41,8 +41,8 @@ def sortedHash(counts):
 
   for subject in counts.keys():
     count, passed = counts[subject]
-    if count < 50: continue # we don't care about insubstantial issues (were raised fewer than 50 times in the floors)
-    by_proportion.append((passed/count, subject, passed, count))
+    if count < 50: continue # we don't care about insubstantial issues (were raised fewer than 50 times)
+    by_proportion.append((passed / count, subject, passed, count))
 
   return(sorted(by_proportion))
 

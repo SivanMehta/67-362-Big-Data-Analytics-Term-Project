@@ -8,10 +8,10 @@ def top10Subjects():
 
     message = "## Top 10 Most Passed Subjects ##"
     print("#" * len(message) + "\n" + message + "\n" + "#" * len(message))
-    header = ("%10s" % "proportion") + ("%51s" % "subject") + ("%7s" % "passed") + ("%9s" % "proposed") 
+    header = ("%10s" % "proportion") + ("%51s" % "subject") + ("%8s" % "enacted") + ("%9s" % "proposed") 
     print(header)
 
     for piece in top10:
-        print("%.8f" % piece[0], "%50s" % piece[1], "%6d" % piece[2], "%8d" % piece[3])
+        print("%.8f" % piece[0], "%50s" % piece[1], "%7d" % piece[2], "%8d" % piece[3])
 
 top10Subjects()

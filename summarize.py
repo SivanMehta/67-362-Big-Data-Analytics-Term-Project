@@ -16,9 +16,9 @@ class Analysis():
                                                     [data["status"] == "ENACTED:SIGNED"]
             except: pass
 
-    def populateFeatureDict(self, path = "bills"):
+    def populateFeatureDict(self, path = "data"):
         print("loading files... ")
-        for path, dirs, files in os.walk("bills"):
+        for path, dirs, files in os.walk(path):
             file_count = len(files)
             for data_file in files:
                 if data_file[-4:] == "json":
