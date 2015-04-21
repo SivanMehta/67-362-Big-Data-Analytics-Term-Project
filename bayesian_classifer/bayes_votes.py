@@ -1,6 +1,6 @@
 from pprint import pprint
 # from matplotlib import pyplot as plt
-import sys, time, math, os
+import sys, time, math, os, json
 
 class classifier:
     def __init__(self, getfeatures, filename=None):
@@ -41,8 +41,8 @@ class classifier:
     def categories(self):
         return self.cc.keys()
 
-    def train(self,item):
-        features, cat = self.getfeatures(item)
+    def train(self,item, cat = "yea"):
+        features = self.getfeatures(item)
         # Increment the count for every feature with this category
         for f in features:
             self.incf(f,cat)
@@ -108,3 +108,32 @@ class naivebayes(classifier):
           if cat==best: continue
           if probs[cat]*self.getthreshold(best)>probs[best]: return default
         return best
+
+
+def getVoteFeatures(votePath):
+    feature_dict = {}
+    # encapsulate in a try/except in case of faults in the data
+    try:
+        with open(votePath) as vote_file:
+            vote_data = json.load(vote_file)
+            if("Nay" not in vote_data["votes"].keys()): # if it was not voted on
+                return feature_dict
+
+            billPath = "data/bills_%d/%s/%s%d/data.json" % (
+                vote_data["bill"]["congress"],
+                vote_data["bill"]["type"],
+                vote_data["bill"]["type"],
+                vote_data["number"]
+                )
+            print(billPath)
+            with open(billPath) as bill_file:
+                bill_data = json.load(bill_file)
+
+            for status in vote_data["votes"].keys():
+                for vote in vote_data["votes"][status]:
+                    for subject in bill_data["subjects"]:
+                        # we are essentially how a particular voter has voted on each subject in the past
+                        feature_dict[(vote["id"], subject)] = status
+
+    except: pass
+    return feature_dict
