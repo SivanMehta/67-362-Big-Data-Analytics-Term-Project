@@ -125,7 +125,7 @@ def getVoteFeatures(votePath):
                 vote_data["bill"]["type"],
                 vote_data["number"]
                 )
-            print(billPath)
+            # print(billPath)
             with open(billPath) as bill_file:
                 bill_data = json.load(bill_file)
 
@@ -137,3 +137,28 @@ def getVoteFeatures(votePath):
 
     except: pass
     return feature_dict
+
+def trainForCongress(predictor, votePath):
+    file_count = 0
+    for path, dirs, files in os.walk(votePath):
+        file_count += len(files)
+    i = 0
+    for path, dirs, files in os.walk(votePath):
+        for data_file in files:
+            if ".json" in data_file:
+                predictor.train(path + "/" + data_file)
+                sys.stdout.flush()
+                sys.stdout.write("\r\ttrained %d/%d votes... " % (i + 1, file_count))
+            i += 1
+    print("finished %s" % votePath)
+
+def trainFeatureDict(predictor):
+    print("Training classifier...")
+    trainForCongress(predictor, "data/votes_111")
+    trainForCongress(predictor, "data/votes_112")
+    print("\t--> done training!")
+
+vote_predictor = naivebayes(getVoteFeatures)
+trainFeatureDict(vote_predictor)
+
+pprint(vote_predictor.fc)
