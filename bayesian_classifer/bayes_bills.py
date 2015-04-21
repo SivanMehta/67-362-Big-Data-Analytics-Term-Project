@@ -121,7 +121,7 @@ def process_states_simple(status):
 
 # takes a path to a bill and creates a dictionary that maps a feature to it's value
 # in this case we are just going to map a feature to 1
-def getFeatures(billPath):
+def getBillFeatures(billPath):
     feature_dict = {}
     status = ""
     with open(billPath) as data_file:
@@ -173,23 +173,22 @@ def predictOutcomes(predictor):
         for data_file in files:
             bill += 1
 
-            actual = getFeatures(path + "/" + data_file)[1]
+            actual = predictor.getfeatures(path + "/" + data_file)[1]
             predicted = 1 - predictor.classify(path + "/" + data_file)
 
             outcomes[0] += 1 if (actual == predicted) else 0
             outcomes[1] += 1
 
             sys.stdout.flush()
-            sys.stdout.write("\r\tclassified bill %d/%d" % (bill, bill_count))
+            sys.stdout.write("\r\tclassified bill %d/%d..." % (bill, bill_count))
     
-    print("\nDone!")
+    print("Done!\n")
     print("Accuracy --> %.5f%% for %d bills" % (100*outcomes[0]/outcomes[1], outcomes[1]))
 
 start = time.time()
-congressional_predictor = naivebayes(getFeatures)
+congressional_predictor = naivebayes(getBillFeatures)
 trainFeatureDict(congressional_predictor)
 predictOutcomes(congressional_predictor)
 totalTime = time.time() - start
 
-message = "## Time for this run: " + ("%2d:%2d" % (totalTime/60, totalTime%60)).replace(" ", "0") + " ##"
-print("#" * (len(message)), "\n", message, "\n", "#" * (len(message)), "\n")
+message = "\nTime for this run: " + ("%2d:%2d" % (totalTime/60, totalTime%60)).replace(" ", "0")
