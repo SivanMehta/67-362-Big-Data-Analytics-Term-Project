@@ -41,7 +41,7 @@ class classifier:
     def categories(self):
         return self.cc.keys()
 
-    def train(self,item, cat = "yea"):
+    def train(self,item, cat):
         features = self.getfeatures(item)
         # Increment the count for every feature with this category
         for f in features:
@@ -75,7 +75,7 @@ class naivebayes(classifier):
         self.thresholds={}
 
     def docprob(self,item,cat):
-        features = self.getfeatures(item)[0]
+        features = self.getfeatures(item)
 
         # Multiply the probabilities of all the features together
         p = 1
@@ -109,5 +109,50 @@ class naivebayes(classifier):
           if probs[cat]*self.getthreshold(best)>probs[best]: return default
         return best
 
+def getVoteFeatures(vote_data):
+    feature_dict = {}
+    voter = vote_data[0]["id"]
+    subject = vote_data[1]
 
-def getVoteFeatures(votePath): pass
+    feature_dict[(voter, subject)] = 1
+
+    return feature_dict
+
+
+def parseFeatures(predictor, votePath):
+     with open(votePath) as vote_file:
+            vote_data = json.load(vote_file)
+            if("Aye" not in vote_data["votes"].keys()): # if it was not voted on
+                return
+
+            try: 
+                billPath = "data/bills_%d/%s/%s%d/data.json" % (
+                    vote_data["bill"]["congress"],
+                    vote_data["bill"]["type"],
+                    vote_data["bill"]["type"],
+                    vote_data["number"] )
+
+                with open(billPath) as bill_file:
+                    bill_data = json.load(bill_file)
+
+                for status in vote_data["votes"].keys():
+                    for vote in vote_data["votes"][status]:
+                        for subject in bill_data["subjects"]:
+                            # we are essentially how a particular voter has voted on each subject in the past
+                            predictor.train((vote, subject), status)
+            except:
+                pass
+
+def trainPredictor(predictor, votePath = "data/votes_111"):
+    for path, dirs, files in os.walk(votePath):
+        for data_file in files:
+            if ".json" in data_file:
+                parseFeatures(predictor, path + "/" + data_file)
+
+def predictOutcomes(predictor):
+    pass
+
+vote_predictor = naivebayes(getVoteFeatures)
+trainPredictor(vote_predictor)
+predictOutcomes(congressional_predictor)
+
