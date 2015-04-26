@@ -4,7 +4,7 @@ from summarize import Analysis
 analysis = Analysis()
 
 def top10Subjects():
-    top10 = analysis.likelyFeatures()[:10]
+    top10 = analysis.likelyFeatures()
 
     message = "## Top 10 Most Passed Subjects ##"
     print("#" * len(message) + "\n" + message + "\n" + "#" * len(message))
