@@ -41,7 +41,7 @@ class classifier:
     def categories(self):
         return self.cc.keys()
 
-    def train(self,item, cat = "yea"):
+    def train(self,item, cat):
         features = self.getfeatures(item)
         # Increment the count for every feature with this category
         for f in features:
@@ -75,7 +75,7 @@ class naivebayes(classifier):
         self.thresholds={}
 
     def docprob(self,item,cat):
-        features = self.getfeatures(item)[0]
+        features = self.getfeatures(item)
 
         # Multiply the probabilities of all the features together
         p = 1
@@ -109,56 +109,50 @@ class naivebayes(classifier):
           if probs[cat]*self.getthreshold(best)>probs[best]: return default
         return best
 
-
-def getVoteFeatures(votePath):
+def getVoteFeatures(vote_data):
     feature_dict = {}
-    # encapsulate in a try/except in case of faults in the data
-    try:
-        with open(votePath) as vote_file:
-            vote_data = json.load(vote_file)
-            if("Nay" not in vote_data["votes"].keys()): # if it was not voted on
-                return feature_dict
+    voter = vote_data[0]["id"]
+    subject = vote_data[1]
 
-            billPath = "data/bills_%d/%s/%s%d/data.json" % (
-                vote_data["bill"]["congress"],
-                vote_data["bill"]["type"],
-                vote_data["bill"]["type"],
-                vote_data["number"]
-                )
-            # print(billPath)
-            with open(billPath) as bill_file:
-                bill_data = json.load(bill_file)
+    feature_dict[(voter, subject)] = 1
 
-            for status in vote_data["votes"].keys():
-                for vote in vote_data["votes"][status]:
-                    for subject in bill_data["subjects"]:
-                        # we are essentially how a particular voter has voted on each subject in the past
-                        feature_dict[(vote["id"], subject)] = status
-
-    except: pass
     return feature_dict
 
-def trainForCongress(predictor, votePath):
-    file_count = 0
-    for path, dirs, files in os.walk(votePath):
-        file_count += len(files)
-    i = 0
+
+def parseFeatures(predictor, votePath):
+     with open(votePath) as vote_file:
+            vote_data = json.load(vote_file)
+            if("Aye" not in vote_data["votes"].keys()): # if it was not voted on
+                return
+
+            try: 
+                billPath = "data/bills_%d/%s/%s%d/data.json" % (
+                    vote_data["bill"]["congress"],
+                    vote_data["bill"]["type"],
+                    vote_data["bill"]["type"],
+                    vote_data["number"] )
+
+                with open(billPath) as bill_file:
+                    bill_data = json.load(bill_file)
+
+                for status in vote_data["votes"].keys():
+                    for vote in vote_data["votes"][status]:
+                        for subject in bill_data["subjects"]:
+                            # we are essentially how a particular voter has voted on each subject in the past
+                            predictor.train((vote, subject), status)
+            except:
+                pass
+
+def trainPredictor(predictor, votePath = "data/votes_111"):
     for path, dirs, files in os.walk(votePath):
         for data_file in files:
             if ".json" in data_file:
-                predictor.train(path + "/" + data_file)
-                sys.stdout.flush()
-                sys.stdout.write("\r\ttrained %d/%d votes... " % (i + 1, file_count))
-            i += 1
-    print("finished %s" % votePath)
+                parseFeatures(predictor, path + "/" + data_file)
 
-def trainFeatureDict(predictor):
-    print("Training classifier...")
-    trainForCongress(predictor, "data/votes_111")
-    trainForCongress(predictor, "data/votes_112")
-    print("\t--> done training!")
+def predictOutcomes(predictor):
+    pass
 
 vote_predictor = naivebayes(getVoteFeatures)
-trainFeatureDict(vote_predictor)
+trainPredictor(vote_predictor)
+predictOutcomes(congressional_predictor)
 
-pprint(vote_predictor.fc)
