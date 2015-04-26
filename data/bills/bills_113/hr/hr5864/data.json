@@ -1,0 +1,70 @@
+{
+  "actions": [
+    {
+      "acted_at": "2014-12-11", 
+      "committees": [
+        "HSPW"
+      ], 
+      "references": [], 
+      "status": "REFERRED", 
+      "text": "Referred to the House Committee on Transportation and Infrastructure.", 
+      "type": "referral"
+    }
+  ], 
+  "amendments": [], 
+  "bill_id": "hr5864-113", 
+  "bill_type": "hr", 
+  "by_request": false, 
+  "committees": [
+    {
+      "activity": [
+        "referral"
+      ], 
+      "committee": "House Transportation and Infrastructure", 
+      "committee_id": "HSPW"
+    }
+  ], 
+  "congress": "113", 
+  "cosponsors": [], 
+  "enacted_as": null, 
+  "history": {
+    "active": false, 
+    "awaiting_signature": false, 
+    "enacted": false, 
+    "vetoed": false
+  }, 
+  "introduced_at": "2014-12-11", 
+  "number": "5864", 
+  "official_title": "To protect Federal employees and visitors, improve the security of Federal facilities, authorize and modernize the Federal Protective Service, and for other purposes.", 
+  "popular_title": null, 
+  "related_bills": [], 
+  "short_title": "FPS Improvement Act of 2014", 
+  "sponsor": {
+    "district": "7", 
+    "name": "Carson, Andre", 
+    "state": "IN", 
+    "thomas_id": "01889", 
+    "title": "Rep", 
+    "type": "person"
+  }, 
+  "status": "REFERRED", 
+  "status_at": "2014-12-11", 
+  "subjects": [], 
+  "subjects_top_term": null, 
+  "summary": null, 
+  "titles": [
+    {
+      "as": "introduced", 
+      "is_for_portion": false, 
+      "title": "FPS Improvement Act of 2014", 
+      "type": "short"
+    }, 
+    {
+      "as": "introduced", 
+      "is_for_portion": false, 
+      "title": "To protect Federal employees and visitors, improve the security of Federal facilities, authorize and modernize the Federal Protective Service, and for other purposes.", 
+      "type": "official"
+    }
+  ], 
+  "updated_at": "2015-01-06T11:05:01-05:00"
+}
