@@ -122,8 +122,6 @@ def getVoteFeatures(vote_data):
 def parseFeatures(predictor, votePath):
     with open(votePath) as vote_file:
         vote_data = json.load(vote_file)
-        if("Aye" not in vote_data["votes"].keys()): # if it was not voted on
-            return
 
         try: 
             billPath = "data/bills_%d/%s/%s%d/data.json" % (
@@ -163,7 +161,7 @@ def trainPredictor(predictor, votePath = "data/votes_111"):
     print ("finished %s" % votePath)
 
 def group(status):
-    return 1 if status == "Aye" else 0
+    return 1 if (status == "Aye" or status == "Yea") else 0
 
 def predictOutcomes(predictor, votePath = "data/votes_113"):
     accuracy = [0,0]
