@@ -42,7 +42,7 @@ def sortedHash(counts):
   for subject in counts.keys():
     count, passed = counts[subject]
     if count < 50: continue # we don't care about insubstantial issues (were raised fewer than 50 times)
-    by_proportion.append((passed / count, subject, passed, count))
+    by_proportion.append((passed/count, subject, count, passed))
 
   return(sorted(by_proportion))
 

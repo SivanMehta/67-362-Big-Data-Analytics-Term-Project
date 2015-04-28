@@ -120,39 +120,97 @@ def getVoteFeatures(vote_data):
 
 
 def parseFeatures(predictor, votePath):
-     with open(votePath) as vote_file:
-            vote_data = json.load(vote_file)
-            if("Aye" not in vote_data["votes"].keys()): # if it was not voted on
-                return
+    with open(votePath) as vote_file:
+        vote_data = json.load(vote_file)
 
-            try: 
-                billPath = "data/bills_%d/%s/%s%d/data.json" % (
-                    vote_data["bill"]["congress"],
-                    vote_data["bill"]["type"],
-                    vote_data["bill"]["type"],
-                    vote_data["number"] )
+        try: 
+            billPath = "data/bills_%d/%s/%s%d/data.json" % (
+                vote_data["bill"]["congress"],
+                vote_data["bill"]["type"],
+                vote_data["bill"]["type"],
+                vote_data["number"] )
 
-                with open(billPath) as bill_file:
-                    bill_data = json.load(bill_file)
+            with open(billPath) as bill_file:
+                bill_data = json.load(bill_file)
 
-                for status in vote_data["votes"].keys():
-                    for vote in vote_data["votes"][status]:
-                        for subject in bill_data["subjects"]:
-                            # we are essentially how a particular voter has voted on each subject in the past
-                            predictor.train((vote, subject), status)
-            except:
-                pass
+            for status in vote_data["votes"].keys():
+                for vote in vote_data["votes"][status]:
+                    for subject in bill_data["subjects"]:
+                        # we are essentially how a particular voter has voted on each subject in the past
+                        predictor.train((vote, subject), group(status))
+        except:
+            pass
+
+    vote_file.close()
 
 def trainPredictor(predictor, votePath = "data/votes_111"):
+    fileCount = 0
+    for path, dirs, files in os.walk(votePath):
+        for data_file in files:
+            fileCount += 1
+
+    i = 0
     for path, dirs, files in os.walk(votePath):
         for data_file in files:
             if ".json" in data_file:
                 parseFeatures(predictor, path + "/" + data_file)
 
-def predictOutcomes(predictor):
-    pass
+                i += 1
+                sys.stdout.flush()
+                sys.stdout.write("\rtrained with %d/%d files... " % (i, fileCount))
+    print ("finished %s" % votePath)
+
+def group(status):
+    return 1 if (status == "Aye" or status == "Yea") else 0
+
+def predictOutcomes(predictor, votePath = "data/votes_113"):
+    accuracy = [0,0]
+    fileCount = 0
+    for path, dirs, files in os.walk(votePath):
+        for data_file in files:
+            fileCount += 1
+
+    i = 0
+    for path, dirs, files in os.walk(votePath):
+        for data_file in files:
+            if ".json" in data_file:
+                with open(path + "/" + data_file) as vote_file:
+                    i += 1
+                    vote_data = json.load(vote_file)
+
+                    try: 
+                        billPath = "data/bills_%d/%s/%s%d/data.json" % (
+                            vote_data["bill"]["congress"],
+                            vote_data["bill"]["type"],
+                            vote_data["bill"]["type"],
+                            vote_data["number"] )
+
+                        with open(billPath) as bill_file:
+                            bill_data = json.load(bill_file)
+
+                        for status in vote_data["votes"].keys():
+                            for vote in vote_data["votes"][status]:
+                                for subject in bill_data["subjects"]:
+                                    # we are essentially how a particular voter has voted on each subject in the past
+                                    # print("here")
+                                    accuracy[0] += predictor.classify((vote, subject)) == group(status)
+                                    accuracy[1] += 1
+
+                        bill_file.close()
+
+
+                    except:
+                        pass
+
+                    sys.stdout.flush()
+                    sys.stdout.write("\rclassified %d/%d files... " % (i, fileCount))
+
+                vote_file.close()
+
+    return accuracy
 
 vote_predictor = naivebayes(getVoteFeatures)
-trainPredictor(vote_predictor)
-predictOutcomes(congressional_predictor)
-
+trainPredictor(vote_predictor, "data/votes_111")
+trainPredictor(vote_predictor, "data/votes_112")
+predictions = predictOutcomes(vote_predictor, "data/votes_113")
+print("%.2f%% accuracy for %d votes" % (100*predictions[0]/predictions[1], predictions[1]) )
