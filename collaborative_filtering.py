@@ -308,8 +308,6 @@ class CollaborativeFilter():
 
         return rmse_arr
 
-    print(k_fold_cf(0.1))
-
 
 votesdir = '/Users/suave/mprojects/termproject/data/votes'
 
@@ -395,8 +393,6 @@ def getVotesArr(congressmen):
 
   for congressman in congressmen:
       for feature in congressman.prefs.keys():
-        # v = {"congressman":congressman, "feature":feature, "vote_perc":congressman.prefs[feature]}
-
         v = {"congressman":congressman.id, "feature":feature, "vote_perc":congressman.prefs[feature]}
         votes.append(v)
 
@@ -407,4 +403,4 @@ def getVotesArr(congressmen):
 collab_filter = CollaborativeFilter()
 congressmen = mparseFeatures()
 votes_arr = getVotesArr(congressmen)
-collab_filter.k_fold_cf(0.1,votes_arr)
+print(collab_filter.k_fold_cf(0.1,votes_arr))
