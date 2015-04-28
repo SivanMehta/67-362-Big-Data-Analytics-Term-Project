@@ -1,6 +1,7 @@
 from copy import deepcopy
 from pprint import pprint
 from math import sqrt
+import multiprocess
 
 '''
 # def docprob(self,item,cat):
@@ -270,6 +271,9 @@ def k_fold_cf(subset_perc, votes_arr):
 
     if (total_votes%seg_size!=0):
         total_segs += 1
+
+    # pool = multiprocess.Pool(16) # 4 'threads'
+    # fold_sims = pool.map(recommendations-2.itemsim,fold_data)
 
     for i in range(0,total_segs):
         prefs, seg = sliceData(i,seg_size,votes_arr)
