@@ -2,17 +2,18 @@ import os, glob, json, re, random
 from os.path import join
 from math import sqrt
 from pprint import pprint
-from copy import deepcopy
+
+import collab_filter
 
 votesdir = '/Users/suave/mprojects/termproject/data/votes'
 exten = '.json'
 
-class MClassifier:
-  def __init__(self):
-    self.bills = {}
-    self.votes = []
-    self.congressmen = {}
-    self.features = {}
+# class MClassifier:
+#   def __init__(self):
+#     self.bills = {}
+#     self.votes = []
+#     self.congressmen = {}
+#     self.features = {}
 
 class Congressman:
   def __init__(self, mID, state, party):
@@ -95,7 +96,6 @@ def mparseFeatures(votePath=votesdir):
                         congressmen.append(congressman)
                         seen_congressmen[congressman.id] = congressman
 
-
                     for subject in bill_data["subjects"]:
                         congressman.incrFeatureCount(subject, status)
                     
@@ -109,6 +109,7 @@ def getVotesArr():
   votes = []
 
   for congressman in congressmen:
+      pprint(congressman.prefs)
       for feature in congressman.prefs.keys():
         v = {"congressman":congressman.id, "feature":feature, "vote_perc":congressman.prefs[feature]}
         votes.append(v)
@@ -117,6 +118,5 @@ def getVotesArr():
   return votes
 
 
-collab_filter = CollaborativeFilter()
 votes_arr = getVotesArr()
 print(collab_filter.k_fold_cf(0.1,votes_arr))
