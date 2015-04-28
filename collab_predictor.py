@@ -5,7 +5,7 @@ from pprint import pprint
 
 import collab_filter
 
-votesdir = '/Users/suave/mprojects/termproject/data/votes'
+votesdir = '/Users/suave/mprojects/termproject/data'
 exten = '.json'
 
 # class MClassifier:
@@ -57,50 +57,53 @@ def mparseFeatures(votePath=votesdir):
   congressmen = []
   seen_congressmen = {}
 
-  for path, dirs, files in os.walk(billPath):
-        # file_count = len(dirs) * len(files)
-        for data_file in files:
-            if ".json" in data_file:
-              file_path = os.path.join(path, data_file)
-              with open(file_path) as vote_file:
-                  print("Found vote file")
-                  vote_data = json.load(vote_file)
-                  if("Aye" not in vote_data["votes"].keys() and
-                    "Yay" not in vote_data["votes"].keys()): # if it was not voted on
-                      print("Did not find Aye or Yay")
-                      continue
+  for path, dirs, files in os.walk(votePath):
+      # file_count = len(dirs) * len(files)
+      for data_file in files:
+          file_path = path + '/' + data_file
 
-                  # try: 
-                  print("Find Aye or Yay")
-                  bill_path = "data/bills_%d/%s/%s%d/data.json" % (
+          # ".json" in data_file
+          if re.match(".+(votes).+\.json", file_path):
+            with open(file_path) as vote_file:
+                # print("Found vote file")
+                vote_data = json.load(vote_file)
+                if("Aye" not in vote_data["votes"].keys() and
+                  "Yay" not in vote_data["votes"].keys()): # if it was not voted on
+                    # print("Did not find Aye or Yay")
+                    continue
+
+                try: 
+                  # print("Found Aye or Yay")
+                  bill_path = "/Users/suave/mprojects/termproject/data/bills_%d/%s/%s%d/data.json" % (
                       vote_data["bill"]["congress"],
                       vote_data["bill"]["type"],
                       vote_data["bill"]["type"],
                       vote_data["number"] )
 
                   with open(bill_path) as bill_file:
-                      print("Found bill file")
+                      # print("Found bill file")
                       bill_data = json.load(bill_file)
                       # bill = Bill(bill_data["subjects"], bill_path)
 
                   for status in vote_data["votes"].keys():
                       for vote in vote_data["votes"][status]:
                           if vote["id"] in seen_congressmen.keys():
-                              print("Found congressman")
+                              # print("Found congressman")
                               congressman = seen_congressmen[vote["id"]]
                           else:
-                              print("Making new congressman")
+                              # print("Making new congressman")
                               congressman = Congressman(vote["id"], vote["state"], vote["party"])
                               congressmen.append(congressman)
                               seen_congressmen[congressman.id] = congressman
 
                           for subject in bill_data["subjects"]:
                               congressman.incrFeatureCount(subject, status)
-                          
-                  return congressmen
+                  bill_file.close()
+                  vote_file.close()                   
 
-                  # except:
-                  #     pass
+                except:
+                    continue
+  return congressmen
 
 def getVotesArr():
   congressmen = mparseFeatures()
@@ -116,5 +119,7 @@ def getVotesArr():
   return votes
 
 
+
 votes_arr = getVotesArr()
+# pprint(votes_arr)
 print(collab_filter.k_fold_cf(0.1,votes_arr))
