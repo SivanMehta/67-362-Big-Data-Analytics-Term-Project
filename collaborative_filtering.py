@@ -1,11 +1,8 @@
 import os, glob, json, re, random
-import 'bayesian_classification/bayes_votes'
-
 from os.path import join
 from math import sqrt
 from pprint import pprint
 from copy import deepcopy
-
 
 class CollaborativeFilter():
     '''
@@ -36,44 +33,6 @@ class CollaborativeFilter():
     def rmse(sum_of_squares,n):
     def k_fold_cf(subset_perc):
     '''
-
-    def __init__(self):
-
-    # def docprob(self,item,cat):
-    #     features = self.getfeatures(item)
-
-    #     # Multiply the probabilities of all the features together
-    #     p = 1
-    #     for f in features: p += math.log(self.weightedprob(f,cat,self.fprob))
-    #     return -1*p
-
-    # def prob(self,item,cat):
-    #     catprob = self.catcount(cat)/self.totalcount()
-    #     docprob = self.docprob(item,cat)
-    #     return 100.0 - (docprob * catprob)
-
-    # def setthreshold(self,cat,t):
-    #     self.thresholds[cat]=t
-
-    # def getthreshold(self,cat):
-    #     if cat not in self.thresholds: return 1.0
-    #     return self.thresholds[cat]
-
-    # def classify(self,item,default = None):
-    #     probs={}
-    #     # Find the category with the highest probability
-
-    #     max = 0.0
-    #     for cat in self.categories():
-    #       probs[cat] = self.prob(item,cat)
-    #       if probs[cat] > max: 
-    #         max = probs[cat]
-    #         best = cat
-    #     for cat in probs:
-    #       if cat==best: continue
-    #       if probs[cat]*self.getthreshold(best)>probs[best]: return default
-    #     return best
-
 
     ###########################################################################
     # Euclidean distance
@@ -258,21 +217,6 @@ class CollaborativeFilter():
 
     ###########################################################################
 
-    # def loadData(path='./ml-100k'):
-    #     movies = {}
-    #     for line in open( path+'/u.item', encoding="ISO-8859-1" ):
-    #         id, title = line.split('|')[0:2]
-    #         movies[id]=title
-
-    #     ml_ratings = []
-    #     for line in open(path+'/u.data'):
-    #         # note that both user and movieid are retained as strings -not- numbers
-    #         user, movieid, rating, ts = line.split('\t')
-    #         ml_ratings.append({"user":user, "movie":movies[movieid],
-    #             "rating":float(rating), "ts":ts})
-
-    #     return ml_ratings
-
 
     def transformToDict(votes):
         votes={}
@@ -367,29 +311,7 @@ class CollaborativeFilter():
     print(k_fold_cf(0.1))
 
 
-# def mtrainPredictor(predictor, votePath = "data/votes_111"):
-#     for path, dirs, files in os.walk(votePath):
-#         for data_file in files:
-#             if ".json" in data_file:
-#                 parseFeatures(predictor, path + "/" + data_file)
-
-
-# mvote_predictor = CollaborativeFilter(getVoteFeatures)
-# mtrainPredictor(vote_predictor)
-
-
-
-
-
-# topdir = '/Users/suave/mprojects/termproject/data'
 votesdir = '/Users/suave/mprojects/termproject/data/votes'
-# exten = '.json'
-
-# mdata = {"hconres":{},"hjres":{},"hr":{},"hres":{},"s":{},"sconres":{},
-#   "sjres":{},"sjres":{},"sres":{}}
-# ndata = {}
-
-# bills = []
 
 class MClassifier:
   def __init__(self):
@@ -397,15 +319,6 @@ class MClassifier:
     self.votes = []
     self.congressmen = {}
     self.features = {}
-
-# class Bill(collab_filter):
-#   def __init__(self, bill_data, result, filepath=None):
-#       self.subjects = bill_data["subjects"]
-#       self.filepath = filepath
-      
-#       # Counts of documents in each category
-#       self.cc = {}
-#       self.getfeatures = getfeatures
 
 class Congressman:
   def __init__(self, mID, state, party):
@@ -440,16 +353,6 @@ class Congressman:
       self.prefs[feature] = fcount / total
 
 
-  # # def addVote(feature, clas, bill, vote_data):
-  # def add(feature, clas):
-  #     # v = {"id":vote_data["id"], "feature":feature, "party":vote_data["party"],
-  #     #      "state":vote_data["state"] "bill":bill, "bill_path":bill_path}
-  #     new_class = "yea" if (clas == "Aye" or mclass == "Yay") else "nea"
-
-  #     # self.votes.append(v)
-  #     self.incrFeatureCount(feature, clas)
-
-
 def mparseFeatures(votePath=votesdir):
   congressmen = []
 
@@ -480,11 +383,10 @@ def mparseFeatures(votePath=votesdir):
                       congressmen.append(congressman)
 
                   for subject in bill_data["subjects"]:
-                      # we are essentially how a particular voter has voted on each subject in the past
-                      # predictor.train((vote, subject), status)
-                      # congressman.addVote(subject, status, vote_data["bill"], vote)
                       congressman.incrFeatureCount(subject, status)
+
           return congressmen
+
       except:
           pass
 
@@ -499,10 +401,6 @@ def getVotesArr(congressmen):
         votes.append(v)
 
   random.shuffle(votes)
-
-  # votes.setdefault( congressman, {} )
-  # votes[congressman][feature] = percentage
-
   return votes
 
 
@@ -510,35 +408,3 @@ collab_filter = CollaborativeFilter()
 congressmen = mparseFeatures()
 votes_arr = getVotesArr(congressmen)
 collab_filter.k_fold_cf(0.1,votes_arr)
-
-
-
-# def remap():
-#   for dirpath, dirnames, files in os.walk(topdir):
-
-#     for mfile in files:
-#       file_path = os.path.join(dirpath, mfile)
-
-#       if mfile.lower().endswith(exten):
-
-#         with open(file_path) as data_file:
-
-#           subdir = os.path.basename(os.path.normpath(dirpath))
-#           num = re.sub("\D", "", subdir)
-#           key = re.sub("\d", "", subdir)
-
-#           tdata = json.load(data_file)
-#           match = re.match("(pass)|(enacted)", temp_data[status], re.I)
-
-#           if match:
-#             tbill = Bill(temp_data["subjects"],file_path)
-#             bills.append(tbill)
-
-#             for 
-#             mdata[key][num] = tdata
-
-#   # pprint(mdata)
-#   with open('/Users/suave/mprojects/termproject/map.txt', 'w') as outfile:
-#     json.dump(mdata, outfile)
-
-# remap()
