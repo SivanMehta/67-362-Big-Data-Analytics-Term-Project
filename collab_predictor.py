@@ -57,59 +57,57 @@ def mparseFeatures(votePath=votesdir):
   congressmen = []
   seen_congressmen = {}
 
-  for dirpath, dirnames, files in os.walk(votePath):
-    print("Found votes dir")
-    for mfile in files:
-      file_path = os.path.join(dirpath, mfile)
+  for path, dirs, files in os.walk(billPath):
+        # file_count = len(dirs) * len(files)
+        for data_file in files:
+            if ".json" in data_file:
+              file_path = os.path.join(path, data_file)
+              with open(file_path) as vote_file:
+                  print("Found vote file")
+                  vote_data = json.load(vote_file)
+                  if("Aye" not in vote_data["votes"].keys() and
+                    "Yay" not in vote_data["votes"].keys()): # if it was not voted on
+                      print("Did not find Aye or Yay")
+                      continue
 
-      if mfile.lower().endswith(exten):
+                  # try: 
+                  print("Find Aye or Yay")
+                  bill_path = "data/bills_%d/%s/%s%d/data.json" % (
+                      vote_data["bill"]["congress"],
+                      vote_data["bill"]["type"],
+                      vote_data["bill"]["type"],
+                      vote_data["number"] )
 
-        with open(file_path) as vote_file:
-            print("Found vote file")
-            vote_data = json.load(vote_file)
-            if("Aye" not in vote_data["votes"].keys() and
-              "Yay" not in vote_data["votes"].keys()): # if it was not voted on
-                print("Did not find Aye or Yay")
-                continue
+                  with open(bill_path) as bill_file:
+                      print("Found bill file")
+                      bill_data = json.load(bill_file)
+                      # bill = Bill(bill_data["subjects"], bill_path)
 
-            # try: 
-            print("Find Aye or Yay")
-            bill_path = "data/bills_%d/%s/%s%d/data.json" % (
-                vote_data["bill"]["congress"],
-                vote_data["bill"]["type"],
-                vote_data["bill"]["type"],
-                vote_data["number"] )
+                  for status in vote_data["votes"].keys():
+                      for vote in vote_data["votes"][status]:
+                          if vote["id"] in seen_congressmen.keys():
+                              print("Found congressman")
+                              congressman = seen_congressmen[vote["id"]]
+                          else:
+                              print("Making new congressman")
+                              congressman = Congressman(vote["id"], vote["state"], vote["party"])
+                              congressmen.append(congressman)
+                              seen_congressmen[congressman.id] = congressman
 
-            with open(bill_path) as bill_file:
-                print("Found bill file")
-                bill_data = json.load(bill_file)
-                # bill = Bill(bill_data["subjects"], bill_path)
+                          for subject in bill_data["subjects"]:
+                              congressman.incrFeatureCount(subject, status)
+                          
+                  return congressmen
 
-            for status in vote_data["votes"].keys():
-                for vote in vote_data["votes"][status]:
-                    if vote["id"] in seen_congressmen.keys():
-                        print("Found congressman")
-                        congressman = seen_congressmen[vote["id"]]
-                    else:
-                        print("Making new congressman")
-                        congressman = Congressman(vote["id"], vote["state"], vote["party"])
-                        congressmen.append(congressman)
-                        seen_congressmen[congressman.id] = congressman
-
-                    for subject in bill_data["subjects"]:
-                        congressman.incrFeatureCount(subject, status)
-                    
-            return congressmen
-
-            # except:
-            #     pass
+                  # except:
+                  #     pass
 
 def getVotesArr():
   congressmen = mparseFeatures()
   votes = []
 
   for congressman in congressmen:
-      pprint(congressman.prefs)
+      # pprint(congressman.prefs)
       for feature in congressman.prefs.keys():
         v = {"congressman":congressman.id, "feature":feature, "vote_perc":congressman.prefs[feature]}
         votes.append(v)

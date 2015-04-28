@@ -225,7 +225,7 @@ def transformToDict(votes):
         new_votes.setdefault( congressman, {} )
         new_votes[congressman][feature] = rate
 
-    pprint(new_votes)
+    # pprint(new_votes)
     return new_votes
 
 
