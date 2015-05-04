@@ -8,54 +8,52 @@ import collab_filter
 votesdir = '/Users/suave/mprojects/termproject/data'
 exten = '.json'
 
-# class MClassifier:
-#   def __init__(self):
-#     self.bills = {}
-#     self.votes = []
-#     self.congressmen = {}
-#     self.features = {}
-
-class Congressman:
-  def __init__(self, mID, state, party):
-      # self.votes = []
-      self.id = mID
-      self.state = state
-      self.party = party
+class Classifier:
+  def __init__(self, classID, vID, vState, vParty):
+      self.id = classID
       self.prefs = {}
+
+      self.vID = vID
+      self.vstate = vState
+      self.vparty = vParty
 
       # Counts of feature/category combinations
       self.fc = {}
 
-  def getFeatureCount(self, feature, clas):
+  def setFeatureDefault(self, feature):
+      if feature not in self.fc.keys():
+        self.fc.setdefault(feature, {})
+        self.fc[feature].setdefault("yea", 0)
+        self.fc[feature].setdefault("nea", 0)
+
+  def getFeatureCount(self, feature, vote):
       if feature in self.fc.keys():
-        return self.fc[feature][clas]
+        if vote in self.fc[feature].keys():
+          return self.fc[feature][vote]
       else:
-        return -1
+        self.setFeatureDefault(feature)
+        return 0
 
-  def incrFeatureCount(self, feature, clas):      
-      self.fc.setdefault(feature, {})
-      self.fc[feature].setdefault("yea", 0)
-      self.fc[feature].setdefault("nea", 0)
-
-      new_class = "yea" if (clas == "Aye" or clas == "Yay") else "nea"
-      self.fc[feature][new_class] += 1
-
+  def incrFeatureCount(self, feature, vote):
+      new_vote = "yea" if (vote == "Aye" or vote == "Yay") else "nea"
+      self.fc[feature][new_vote] = self.getFeatureCount(feature, new_vote) + 1
       self.updatePrefs(feature, "yea")
 
-  def updatePrefs(self, feature, clas):
-      # self.fc[feature].setdefault(clas, 0)
-      fcount = self.fc[feature][clas]
+  def updatePrefs(self, feature, vote):
+      fcount = self.getFeatureCount(feature,vote)
 
       total = 0
       for key in self.fc[feature].keys():
         total += self.fc[feature][key]
 
+      # print("yeas: %s, total: %s" % (fcount, total))
+
       self.prefs[feature] = fcount / total
 
 
 def mparseFeatures(votePath=votesdir):
-  congressmen = []
-  seen_congressmen = {}
+  classes = []
+  seen_class = {}
 
   for path, dirs, files in os.walk(votePath):
       # file_count = len(dirs) * len(files)
@@ -83,43 +81,73 @@ def mparseFeatures(votePath=votesdir):
                   with open(bill_path) as bill_file:
                       # print("Found bill file")
                       bill_data = json.load(bill_file)
-                      # bill = Bill(bill_data["subjects"], bill_path)
 
                   for status in vote_data["votes"].keys():
                       for vote in vote_data["votes"][status]:
-                          if vote["id"] in seen_congressmen.keys():
-                              # print("Found congressman")
-                              congressman = seen_congressmen[vote["id"]]
+                          class_id = vote["state"]
+                          if class_id in seen_class.keys():
+                              # print("Found clas")
+                              clas = seen_class[class_id]
                           else:
-                              # print("Making new congressman")
-                              congressman = Congressman(vote["id"], vote["state"], vote["party"])
-                              congressmen.append(congressman)
-                              seen_congressmen[congressman.id] = congressman
+                              # print("Making new clas")
+                              clas = Classifier(class_id, vote["id"], vote["state"], vote["party"])
+                              classes.append(clas)
+                              seen_class[class_id] = clas
 
                           for subject in bill_data["subjects"]:
-                              congressman.incrFeatureCount(subject, status)
+                              clas.incrFeatureCount(subject, status)
                   bill_file.close()
-                  vote_file.close()                   
+                  vote_file.close()
 
                 except:
                     continue
-  return congressmen
+  return classes
 
 def getVotesArr():
-  congressmen = mparseFeatures()
+  classes = mparseFeatures()
   votes = []
+  stats = []
 
-  for congressman in congressmen:
-      # pprint(congressman.prefs)
-      for feature in congressman.prefs.keys():
-        v = {"congressman":congressman.id, "feature":feature, "vote_perc":congressman.prefs[feature]}
+  for clas in classes:
+      # pprint(clas.prefs)
+      highest = {"h":0, "feat":""}
+      lowest = {"l":100, "feat":""}
+
+      for feature in clas.prefs.keys():
+        perc = clas.prefs[feature]
+
+        # if 0 < perc and perc < 1:
+
+        if perc < lowest["l"]:
+          lowest["l"] = perc
+          lowest["feat"] = feature
+        if highest["h"] < perc:
+          highest["h"] = perc
+          highest["feat"] = feature
+
+        v = {"id":clas.id, "feature":feature, "vote_perc":clas.prefs[feature],
+              "vID":clas.vID, "vstate":clas.vstate, "vparty":clas.vparty}
         votes.append(v)
 
+      stats.append({"id":clas.id, "vstate":clas.vstate, "vparty":clas.vparty,
+        "lowest":lowest["l"], "highest":highest["h"], "low_feat":lowest["feat"],
+        "high_feat":highest["feat"]})
+
   random.shuffle(votes)
-  return votes
+  # print("Size of votes_arr: %s" % len(votes))
+  return votes, stats
 
 
 
-votes_arr = getVotesArr()
-# pprint(votes_arr)
+votes_arr, stats = getVotesArr()
+with open('id_stats.txt', 'w+') as outfile:
+  for v in stats:
+    low_str = v["low_feat"].replace(',', ':')
+    high_str = v["high_feat"].replace(',', ':')
+    s = ("%s, %s, %s, %s, %s, %s, %s" % (v["id"], v["vstate"],
+         v["vparty"], v["lowest"], low_str, v["highest"], high_str))
+    print(s, file=outfile)
+outfile.close()
+pprint(votes_arr[0:20])
+votes_slice = votes_arr[0:500000]
 print(collab_filter.k_fold_cf(0.1,votes_arr))

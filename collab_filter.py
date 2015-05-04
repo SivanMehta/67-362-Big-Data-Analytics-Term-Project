@@ -1,7 +1,7 @@
 from copy import deepcopy
 from pprint import pprint
 from math import sqrt
-import multiprocess
+# import multiprocessing
 
 '''
 # def docprob(self,item,cat):
@@ -83,8 +83,14 @@ def sim_pearson(prefs, p1, p2 ):
 
   # Calculate r (Pearson score)
   num=sumXY-(sumX*sumY/n)
-  den=sqrt((sumXSq-pow(sumX,2)/n)*(sumYSq-pow(sumY,2)/n))
-  if den==0: return 0
+  # pprint(prefs)
+  # print("%f" % (sumXSq-pow(sumX,2)/n))
+  # print("%f" % (sumYSq-pow(sumY,2)/n))
+  try:
+    den=sqrt((sumXSq-pow(sumX,2)/n)*(sumYSq-pow(sumY,2)/n))
+    if den==0: return 0
+  except:
+    return 0
 
   r=num/den
 
@@ -216,18 +222,18 @@ def getRecommendedItems(prefs, itemMatch, user ):
 ###########################################################################
 
 
-def transformToDict(votes):
-    new_votes = {}
-    for vote in votes:
-        congressman = vote["congressman"]
+def transformToDict(votes_arr):
+    new_prefs = {}
+    for vote in votes_arr:
+        clas = vote["id"]
         feature = vote["feature"]
         rate = vote["vote_perc"]
 
-        new_votes.setdefault( congressman, {} )
-        new_votes[congressman][feature] = rate
+        new_prefs.setdefault( clas, {} )
+        new_prefs[clas][feature] = rate
 
-    # pprint(new_votes)
-    return new_votes
+    # pprint(new_prefs)
+    return new_prefs
 
 
 def sliceData(seg_n, seg_size, votes):
@@ -285,24 +291,31 @@ def k_fold_cf(subset_perc, votes_arr):
         sumSquares = 0
         rmse_val = 0
         for vote in seg:
-            congressman = vote["congressman"]
+            clas = vote["id"]
             feature = vote["feature"]
 
-            if congressman in seen_votes:
-                votes = seen_votes[congressman]
-            else:
-                votes = getRecommendedItems(prefs,item_sim,congressman)
-                seen_votes[congressman] = votes
+            if clas in prefs.keys():
+              # print("%s (clas)" % (clas))
+              if feature in seen_votes:
+                  votes = seen_votes[clas]
+              else:
+                  votes = getRecommendedItems(prefs,item_sim,clas)
+                  if votes:
+                    seen_votes[clas] = votes
 
-            for (rate,subject) in votes:
-                if subject == feature:
-                    predicted = rate
-                    break
+              if len(votes) == 0:
+                continue
+              else:
+                # print(votes)
+                for (rate,subject) in votes:
+                    if subject == feature:
+                        # print("%s (subject), %s (feature), %s (predicted), %s (actual)" % (subject, feature, rate, vote["vote_perc"]))
+                        predicted = rate
+                        actual = vote["vote_perc"]
 
-            actual = vote["vote_perc"]
-
-            squaredPminusA = ((predicted - actual)**2)
-            sumSquares += squaredPminusA
+                        squaredPminusA = ((predicted - actual)**2)
+                        sumSquares += squaredPminusA
+                        break
 
         rmse_val = rmse(sumSquares,len(seg))
         print("rmse = {:.5f}".format(rmse_val))
