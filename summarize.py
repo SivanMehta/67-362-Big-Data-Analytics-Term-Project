@@ -18,17 +18,23 @@ class Analysis():
 
     def populateFeatureDict(self, path = "data"):
         print("loading files... ")
+        count = 0
         for path, dirs, files in os.walk(path):
-            file_count = len(files)
             for data_file in files:
                 if data_file[-4:] == "json":
                     self.loadFile(path + "/" + data_file)
+
+            count += 1
+            sys.stdout.flush()
+            sys.stdout.write("\rSeen %d documents" % count)
+            
         print(coloredMessage("\tDone", "green"))
 
     # attempts to answer the question "what types of bills get passed"
     # by looking at the subjects and seeing what proportion of each get passed
     def likelyFeatures(self):
 
+        seen = 0
         # compile the features into map with {subject: (count, passed)}
         subjects = {}
         for bill in self.feature_dict.keys():
@@ -39,7 +45,7 @@ class Analysis():
                 subjects[subject][1] += 1 if self.feature_dict[bill][-1] else 0
 
         # pprint(subjects)
-        return(sortedHash(subjects)[::-1])
+        return(sortedHash(subjects)[::-1][:10])
 
 if __name__ == '__main__':
     pprint(Analysis().likelyFeatures())
