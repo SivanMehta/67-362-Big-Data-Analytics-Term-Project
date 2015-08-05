@@ -1,11 +1,11 @@
-proportion,subject,enacted,proposed
-0.30303030303030304,Palau,66,20
-0.2962962962962963,Federal Bureau of Investigation (FBI),54,16
-0.29591836734693877,Postal service,588,174
-0.29508196721311475,Micronesia,61,18
-0.2923076923076923,Marshall Islands,65,19
-0.2692307692307692,Central Intelligence Agency (CIA),52,14
-0.2631578947368421,Smithsonian Institution,95,25
-0.25,Colombia,60,15
-0.2342007434944238,|Government buildings, facilities, and property|,1076,252
-0.22,National Archives and Records Administration,50,11
+proportion|subject|enacted|proposed
+0.30303030303030304|Palau|66|20
+0.2962962962962963|Federal Bureau of Investigation (FBI)|54|16
+0.29591836734693877|Postal service|588|174
+0.29508196721311475|Micronesia|61|18
+0.2923076923076923|Marshall Islands|65|19
+0.2692307692307692|Central Intelligence Agency (CIA)|52|14
+0.2631578947368421|Smithsonian Institution|95|25
+0.25|Colombia|60|15
+0.2342007434944238|Government buildings, facilities, and property|1076|252
+0.22|National Archives and Records Administration|50|11
