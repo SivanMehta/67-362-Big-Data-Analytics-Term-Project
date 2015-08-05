@@ -1,4 +1,7 @@
+# ignore automatically generated files
 __pycache__/
 data/
 *.py[cod]
-.DS_Store
+*.DS_Store
+*.bayes
+
