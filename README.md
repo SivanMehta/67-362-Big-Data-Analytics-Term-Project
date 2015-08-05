@@ -8,14 +8,16 @@ Currently, I am just exploring the data set. Here are some things that I am look
 * Who is likely to sign a certain bill?
 * What type of bill would theoretically have the best chance of getting passed?
 
-#### Requirements
+## Requirements
 
 ```shell
 [~] python3 --version
 Python 3.5.0a1
 ```
 
-#### Usage
+## Usage
+
+#### Classification
 
 You can run a Bayesian classifer based on bills via the following command:
 
@@ -52,3 +54,15 @@ Predicting Outcomes for 113th congress...
 
 Accuracy --> 81.90663% for 11203 bills
 ```
+
+#### Data Analysis
+
+There is *some* analytics built in here. You can find the 10 top most passed subjects in all the bills by running the following command:
+
+```shell
+[~] python3 demo.py
+loading files...
+Seen 42952 documents	Done
+```
+
+This will generate a summary that is piped to `report.csv`. This report shows the top 10 subjects to appear in the data, when ordered by proportion of bills that are passed.
