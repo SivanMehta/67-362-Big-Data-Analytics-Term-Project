@@ -185,10 +185,13 @@ def predictOutcomes(predictor):
     print("Done!\n")
     print("Accuracy --> %.5f%% for %d bills" % (100*outcomes[0]/outcomes[1], outcomes[1]))
 
-start = time.time()
-congressional_predictor = naivebayes(getBillFeatures)
-trainFeatureDict(congressional_predictor)
-predictOutcomes(congressional_predictor)
-totalTime = time.time() - start
+def main():
+    start = time.time()
+    congressional_predictor = naivebayes(getBillFeatures)
+    trainFeatureDict(congressional_predictor)
+    predictOutcomes(congressional_predictor)
+    totalTime = time.time() - start
+    message = "\nTime for this run: " + ("%2d:%2d" % (totalTime/60, totalTime%60)).replace(" ", "0")
 
-message = "\nTime for this run: " + ("%2d:%2d" % (totalTime/60, totalTime%60)).replace(" ", "0")
+if __name__ == "__main__":
+    main()
