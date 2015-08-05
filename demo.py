@@ -23,12 +23,12 @@ def top10Subjects():
     for piece in top10:
             out += [list(piece)]
 
-    with open('report.csv', 'w+') as csvfile:
-        spamwriter = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    with open('report.tsv', 'w+') as csvfile:
+        spamwriter = csv.writer(csvfile, delimiter='\t')
         for row in out:
             spamwriter.writerow(row)
         
 
-    pprint(out)
+    # pprint(out)
 
 top10Subjects()
