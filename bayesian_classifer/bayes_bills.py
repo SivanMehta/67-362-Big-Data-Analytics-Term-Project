@@ -1,4 +1,4 @@
-import sys, time, math, os, json
+import sys, time, math, os, json, pickle
 from pprint import pprint
 
 class classifier:
@@ -152,15 +152,15 @@ def trainForCongress(predictor, billPath):
                 predictor.train(path + "/" + data_file)
 
                 sys.stdout.flush()
-                sys.stdout.write("\r\ttrained %d/%d bills... " % (i + 1, file_count))
+                sys.stdout.write("\r\t\ttrained %d/%d bills... " % (i + 1, file_count))
             i += 1
     print("finished %s" % billPath)
 
 def trainFeatureDict(predictor):
-    print("Training classifier...")
+    print("\tTraining classifier...")
     trainForCongress(predictor, "data/bills_111")
     trainForCongress(predictor, "data/bills_112")
-    print("\t--> done training!")
+    print("\t\t--> done training!")
 
 def predictOutcomes(predictor):
     print("Predicting Outcomes for 113th congress...")
@@ -187,8 +187,21 @@ def predictOutcomes(predictor):
 
 def main():
     start = time.time()
-    congressional_predictor = naivebayes(getBillFeatures)
-    trainFeatureDict(congressional_predictor)
+    congressional_predictor = "maybe?"
+    print("Creating Classifier...")
+
+    if not os.path.isfile("predictor.bayes"):
+        print("\tGenerating...")
+        congressional_predictor = naivebayes(getBillFeatures)
+        trainFeatureDict(congressional_predictor)
+
+        save_file = open("predictor.bayes", "wb+")
+        pickle.dump(congressional_predictor, save_file)
+    else:
+        print("\tLoaded from file")
+        save_file = open("predictor.bayes", "rb")
+        congressional_predictor = pickle.load(save_file)
+
     predictOutcomes(congressional_predictor)
     totalTime = time.time() - start
     message = "\nTime for this run: " + ("%2d:%2d" % (totalTime/60, totalTime%60)).replace(" ", "0")
