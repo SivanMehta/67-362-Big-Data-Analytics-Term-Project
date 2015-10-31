@@ -1,4 +1,4 @@
-from helpers import *
+from helpers.analysis_utilities import *
 import json, sys
 from pprint import pprint
 
@@ -49,3 +49,4 @@ class Analysis():
 
 if __name__ == '__main__':
     pprint(Analysis().likelyFeatures())
+
