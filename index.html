@@ -1,0 +1,71 @@
+<head>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+
+    <style type="text/css">
+    body
+    {
+        margin: 5%;
+    }
+
+    p, li, h1, h2, h4
+    {
+        font-family: "Helvetica Neue";
+    }
+
+    code
+    {
+        font-family: Consolas;
+    }
+    </style>
+</head>
+<h1 id="predicting-congress">Predicting Congress</h1>
+<p>This project uses data from <a href="https://www.govtrack.us/developers/data">here</a> and <a href="https://github.com/unitedstates/congress">here</a> to attempt to predict Congressional results.</p>
+<p>Currently, I am just exploring the data set. Here are some things that I am looking at right now:</p>
+<ul>
+<li>What type of bills get passed?</li>
+<li>Who is likely to sign a certain bill?</li>
+<li>What type of bill would theoretically have the best chance of getting passed?</li>
+</ul>
+<h2 id="requirements">Requirements</h2>
+<pre class="shell"><code>[~] python3 --version
+Python 3.5.0a1</code></pre>
+<h2 id="usage">Usage</h2>
+<h4 id="classification">Classification</h4>
+<p>You can run a Bayesian classifer based on bills via the following command:</p>
+<pre class="shell"><code>python3 bayesian_classifier/bayes_bills.py</code></pre>
+<p>This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 4/18/2015, we can predict whether or not a bill will be enacted into law with <strong>an accuracy of 81.90663%</strong></p>
+<p>The example output will be as follows:</p>
+<pre><code>[~] python3 bayesian_classifer/bayes_bills.py
+Creating Classifier...
+    Generating...
+    Training classifier...
+        trained 13675/13675 bills... finished data/bills_111
+        trained 12299/12299 bills... finished data/bills_112
+        --&gt; done training!
+Predicting Outcomes for 113th congress...
+    classified bill 11203/11203...Done!
+
+Accuracy --&gt; 81.90663% for 11203 bills</code></pre>
+<p>However, if you have run the classifier in the past, the program will not re-train the classifer, but rather load it from a file called <code>predictor.bayes</code></p>
+<pre><code>[~] python3 bayesian_classifer/bayes_bills.py
+Creating Classifier...
+    Loaded from file
+Predicting Outcomes for 113th congress...
+    classified bill 11203/11203...Done!
+
+Accuracy --&gt; 81.90663% for 11203 bills</code></pre>
+<h4 id="data-analysis">Data Analysis</h4>
+<p>There is <em>some</em> analytics built in here. You can find the 10 top most passed subjects in all the bills by running the following command:</p>
+<pre class="shell"><code>[~] python3 demo.py
+loading files...
+Seen 42952 documents    Done</code></pre>
+<p>This will generate a summary that is piped to <code>report.csv</code>. This report shows the top 10 subjects to appear in the data, when ordered by proportion of bills that are passed.</p>
+<script type="text/javascript">
+    var code_blocks = document.getElementsByTagName('pre');
+    
+    for(var i = 0; i < code_blocks.length; i ++)
+    {
+        hljs.highlightBlock(code_blocks[i]);
+    }
+</script>
