@@ -5,7 +5,7 @@ from pprint import pprint
 
 import collab_filter
 
-votesdir = '/Users/suave/mprojects/termproject/data'
+votesdir = 'data'
 exten = '.json'
 
 class Classifier:
@@ -72,7 +72,7 @@ def mparseFeatures(votePath=votesdir):
 
                 try: 
                   # print("Found Aye or Yay")
-                  bill_path = "/Users/suave/mprojects/termproject/data/bills_%d/%s/%s%d/data.json" % (
+                  bill_path = "data/bills_%d/%s/%s%d/data.json" % (
                       vote_data["bill"]["congress"],
                       vote_data["bill"]["type"],
                       vote_data["bill"]["type"],
@@ -138,16 +138,19 @@ def getVotesArr():
   return votes, stats
 
 
+# Shaun never got this working
+def run():
+  votes_arr, stats = getVotesArr()
+  with open('id_stats.txt', 'w+') as outfile:
+    for v in stats:
+      low_str = v["low_feat"].replace(',', ':')
+      high_str = v["high_feat"].replace(',', ':')
+      s = ("%s, %s, %s, %s, %s, %s, %s" % (v["id"], v["vstate"],
+           v["vparty"], v["lowest"], low_str, v["highest"], high_str))
+      print(s, file="outfile.bayes")
+  outfile.close()
+  pprint(votes_arr[0:20])
+  votes_slice = votes_arr[0:500000]
+  print(collab_filter.k_fold_cf(0.1,votes_arr))
 
-votes_arr, stats = getVotesArr()
-with open('id_stats.txt', 'w+') as outfile:
-  for v in stats:
-    low_str = v["low_feat"].replace(',', ':')
-    high_str = v["high_feat"].replace(',', ':')
-    s = ("%s, %s, %s, %s, %s, %s, %s" % (v["id"], v["vstate"],
-         v["vparty"], v["lowest"], low_str, v["highest"], high_str))
-    print(s, file=outfile)
-outfile.close()
-pprint(votes_arr[0:20])
-votes_slice = votes_arr[0:500000]
-print(collab_filter.k_fold_cf(0.1,votes_arr))
+print("Shaun never got this module working correctly")
