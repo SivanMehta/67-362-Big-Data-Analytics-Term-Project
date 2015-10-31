@@ -2,10 +2,6 @@ from pprint import pprint
 # from matplotlib import pyplot as plt
 import sys, time, math, os
 
-###########################################################################
-# sim_pearson
-###########################################################################
-
 class ColorError(LookupError): pass
 
 def coloredMessage(message, color):
