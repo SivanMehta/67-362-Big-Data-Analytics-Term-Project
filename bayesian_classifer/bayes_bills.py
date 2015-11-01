@@ -131,8 +131,8 @@ def getBillFeatures(billPath):
             # feature_dict[data["bill_id"]] = data["subjects"] + [data["status"]]
             status = process_states_simple(data["status"])
 
-            # for subject in data["subjects"]:
-            #     feature_dict[subject] = status
+            for subject in data["subjects"]:
+                feature_dict[subject] = status
             # # feature_dict[data["bill_type"]] = status
             feature_dict[data["sponsor"]["name"]] = status
         except: pass
