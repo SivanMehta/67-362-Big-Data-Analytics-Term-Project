@@ -11,8 +11,9 @@ Currently, I am just exploring the data set. Here are some things that I am look
 ## Requirements
 
 ```shell
-$ python3 --version
+$ python3 --version ; pandoc --version
 Python 3.5.0a1
+pandoc 1.15.0.6
 ```
 
 ## Usage
