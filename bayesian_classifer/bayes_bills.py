@@ -121,7 +121,7 @@ def process_states_simple(status):
     return 1 if "ENACTED" in status else 0
 
 # takes a path to a bill and creates a dictionary that maps a feature to it's value
-# in this case we are just going to map a feature to 1
+# in this case we are just going to map a feature to it's status
 def getBillFeatures(billPath):
     feature_dict = {}
     status = ""
