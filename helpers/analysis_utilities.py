@@ -42,10 +42,3 @@ def sortedHash(counts):
 
   return(sorted(by_proportion))
 
-
-def downloadFiles():
-  # download files
-  os.system("rsync -avz --delete --delete-excluded --exclude **/text-versions/ govtrack.us::govtrackdata/congress/111/bills data")
-
-  # remove the files we won't ever read
-  os.system("find . -name '*.xml' -type f -delete")
