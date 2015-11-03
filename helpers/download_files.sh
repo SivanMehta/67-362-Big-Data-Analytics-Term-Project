@@ -5,3 +5,6 @@ rsync -avz --delete --delete-excluded --exclude **/text-versions/ govtrack.us::g
 
 # remove the xml files
 find . -name '*.xml' -type f -delete
+
+# remove unneeded json files
+find . -name 'text-versions.' -type f -delete
