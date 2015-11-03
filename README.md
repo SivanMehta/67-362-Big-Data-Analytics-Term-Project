@@ -48,11 +48,11 @@ However, if you have run the classifier in the past, the program will not re-tra
 ```
 [~] python3 bayesian_classifer/bayes_bills.py
 Creating Classifier...
-    Loaded from file
+	Loaded from file
 Predicting Outcomes for 113th congress...
-    classified bill 11203/11203...Done!
+	classified bill 11203/11203...Done!
 
-Accuracy --> 81.90663% for 11203 bills
+Accuracy --> 92.21637% for 11203 bills
 ```
 
 #### Data Analysis
