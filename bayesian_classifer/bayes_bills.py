@@ -106,7 +106,7 @@ class naivebayes(classifier):
         for cat in probs:
           if cat==best: continue
           if probs[cat]*self.getthreshold(best)>probs[best]: return default
-        return best
+        return 1 - best
 
 # because there are too many bill_statuses to be useful, we will group them into XXX categories:
 # 1. became law
@@ -174,7 +174,7 @@ def predictOutcomes(predictor):
             bill += 1
 
             actual = predictor.getfeatures(path + "/" + data_file)[1]
-            predicted = 1 - predictor.classify(path + "/" + data_file)
+            predicted = predictor.classify(path + "/" + data_file)
 
             outcomes[0] += 1 if (actual == predicted) else 0
             outcomes[1] += 1
