@@ -1,5 +1,6 @@
 import sys, time, math, os, json, pickle
 from pprint import pprint
+import psycopg2
 
 class classifier:
     def __init__(self, getfeatures, filename=None):
@@ -185,6 +186,29 @@ def predictOutcomes(predictor):
     print("Done!\n")
     print("Accuracy --> %.5f%% for %d bills" % (100*outcomes[0]/outcomes[1], outcomes[1]))
 
+def test_with_postgres(predictor):
+    conn = psycopg2.connect(database="congress", user="skmehta", host="127.0.0.1", port="5432")
+    cur = conn.cursor()
+    conn.autocommit=True
+
+    cur.execute(
+    '''
+    SELECT * from bills;
+    ''')
+
+    bills_ids = cur.fetchall()
+
+    for bill_data in bills_ids:
+        bill_id = bill_data[0]
+        cur.execute(
+        '''
+        SELECT subject from bills_subjects
+        join bills on bills.bill_id = bills_subjects.bill_id
+        where bills.bill_id = '%s';
+        ''' % bill_id);
+        bill_subjects = cur.fetchall()
+        print(bill_id, bill_subjects)
+
 def main():
     start = time.time()
     congressional_predictor = "maybe?"
@@ -208,3 +232,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # test_with_postgres(None)
