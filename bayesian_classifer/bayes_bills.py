@@ -207,7 +207,7 @@ def test_with_postgres(predictor):
         where bills.bill_id = '%s';
         ''' % bill_id);
         bill_subjects = cur.fetchall()
-        print(bill_id, bill_subjects)
+        predictor.train(postgres_get_features([bill_data[1], bill_data[2], bill_subjects]))
 
 def main():
     start = time.time()
@@ -232,4 +232,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # test_with_postgres(None)
