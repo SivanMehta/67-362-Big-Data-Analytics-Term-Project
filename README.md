@@ -26,7 +26,7 @@ You can run a Bayesian classifer based on bills via the following command:
 $ python3 bayesian_classifier/bayes_bills.py
 ```
 
-This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 11/10/2015, we can predict whether or not a bill will be enacted into law with **an accuracy of 96.87%**
+This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 11/10/2015, we can predict whether or not a bill will be enacted into law with **an accuracy of 96.88%**
 
 The example output will be as follows:
 
