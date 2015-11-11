@@ -35,7 +35,7 @@ pandoc 1.15.0.6</code></pre>
 <h4 id="classification">Classification</h4>
 <p>You can run a Bayesian classifer based on bills via the following command:</p>
 <pre class="shell"><code>$ python3 bayesian_classifier/bayes_bills.py</code></pre>
-<p>This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 10/1/2015, we can predict whether or not a bill will be enacted into law with <strong>an accuracy of 92.22%</strong></p>
+<p>This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 11/10/2015, we can predict whether or not a bill will be enacted into law with <strong>an accuracy of 97.12%</strong></p>
 <p>The example output will be as follows:</p>
 <pre><code>$ python3 bayesian_classifer/bayes_bills.py
 Creating Classifier...
@@ -47,15 +47,15 @@ Creating Classifier...
 Predicting Outcomes for 113th congress...
     classified bill 11203/11203...Done!
 
-Accuracy --&gt; 92.21637% for 11203 bills</code></pre>
+Accuracy --&gt; 97.12325% for 10637 bills</code></pre>
 <p>However, if you have run the classifier in the past, the program will not re-train the classifer, but rather load it from a file called <code>predictor.bayes</code></p>
 <pre><code>$ python3 bayesian_classifer/bayes_bills.py
 Creating Classifier...
     Loaded from file
 Predicting Outcomes for 113th congress...
-    classified bill 11203/11203...Done!
+    classified bill 10637/10637...Done!
 
-Accuracy --&gt; 92.21637% for 11203 bills</code></pre>
+Accuracy --&gt; 97.12325% for 10637 bills</code></pre>
 <h4 id="data-analysis">Data Analysis</h4>
 <p>There is <em>some</em> analytics built in here. You can find the 10 top most passed subjects in all the bills by running the following command:</p>
 <pre class="shell"><code>$ python3 demo.py
