@@ -186,6 +186,18 @@ def predictOutcomes(predictor):
     print("Accuracy --> %.5f%% for %d bills" % (100*outcomes[0]/outcomes[1], outcomes[1]))
 
 def main():
+    if not os.path.exists("data"):
+        message = """\t 
+            You don't have the data/ folder with the JSON versions of each bill.
+            please run the following command to download them (takes ~15 depending on the computer)
+
+            ./helpers/download_files.sh
+
+        """
+        print(message)
+
+        return
+    
     start = time.time()
     congressional_predictor = "maybe?"
     print("Creating Classifier...")
