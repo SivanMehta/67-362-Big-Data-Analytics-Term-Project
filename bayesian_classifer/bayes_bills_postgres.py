@@ -1,4 +1,7 @@
-import time, sys
+import time
+import sys
+import os
+import pickle
 import psycopg2
 
 class classifier:
@@ -162,16 +165,26 @@ def train_with_postgres(predictor):
         sys.stdout.write("\rTrained %d/%d bills" % (trained, bill_count))
 
         # if trained > 100:
-            # break
+        #     break
 
-    print
-
-    print predictor.fc
+    print predictor.categories()
 
 def main():
     start = time.time()
-    predictor = naivebayes(get_features)
-    train_with_postgres(predictor)
+
+    predictor = "maybe?"
+
+    if not os.path.isfile("postgres_predictor.bayes"):
+        print("Generating...")
+        predictor = naivebayes(get_features)
+        train_with_postgres(predictor)
+
+        save_file = open("postgres_predictor.bayes", "wb+")
+        pickle.dump(predictor, save_file)
+    else:
+        save_file = open("postgres_predictor.bayes", "rb")
+        predictor = pickle.load(save_file)
+        print("Loaded from file")
 
 if __name__ == "__main__":
     main()
