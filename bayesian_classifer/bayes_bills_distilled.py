@@ -2,7 +2,6 @@ import time
 import sys
 import os
 import pickle
-import psycopg2
 
 class classifier:
     def __init__(self, getfeatures, filename=None):
@@ -124,51 +123,6 @@ def get_features(data):
 
     return features
 
-def train_with_postgres(predictor):
-    conn = psycopg2.connect(database="congress", user="skmehta", host="127.0.0.1", port="5432")
-    cur = conn.cursor()
-    conn.autocommit=True
-
-    cur.execute(
-    '''
-        SELECT * FROM bills;
-    ''')
-
-    bill_data = cur.fetchall()
-
-    cur.execute(
-        '''
-        select count(bill_id) from bills;
-        '''
-        )
-    bill_count = cur.fetchall()[0][0]
-
-    trained = 0
-    for row in bill_data:
-        bill_id = row[0]
-        cur.execute(
-        '''
-        SELECT subject from bills_subjects
-        join bills on bills.bill_id = bills_subjects.bill_id
-        where bills.bill_id = '%s';
-        ''' % bill_id);
-        sponsor = row[1]
-        result = row[2]
-        bill_subjects = cur.fetchall()
-        data = [sponsor, bill_subjects]
-        predictor.train(data, result)
-
-        trained += 1
-
-
-        sys.stdout.flush()
-        sys.stdout.write("\rTrained %d/%d bills" % (trained, bill_count))
-
-        # if trained > 100:
-        #     break
-
-    print(predictor.categories())
-
 def train_with_distilled(predictor):
     csv_file = open("data_distilled/distilled_bills_1NF.csv", "r")
 
@@ -189,8 +143,6 @@ def train_with_distilled(predictor):
             sys.stdout.write("\rTrained %d/36610 bills" % seen)
         except:
             pass
-
-    print()
 
     print(predictor.fc)
 
