@@ -98,6 +98,7 @@ class naivebayes(classifier):
         # Find the category with the highest probability
 
         max = 0.0
+        best = 0
         for cat in self.categories():
           probs[cat] = self.prob(item,cat)
           if probs[cat] > max: 
@@ -191,13 +192,13 @@ def main():
             You don't have the data/ folder with the JSON versions of each bill.
             please run the following command to download them (takes ~15 depending on the computer)
 
-            ./helpers/download_files.sh
+            ./helpers/download_files.sh <congress-number>
 
         """
         print(message)
 
         return
-    
+
     start = time.time()
     congressional_predictor = "maybe?"
     print("Creating Classifier...")
