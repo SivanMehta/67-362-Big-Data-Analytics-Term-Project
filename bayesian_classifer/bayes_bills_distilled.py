@@ -167,22 +167,47 @@ def train_with_postgres(predictor):
         # if trained > 100:
         #     break
 
-    print predictor.categories()
+    print(predictor.categories())
+
+def train_with_distilled(predictor):
+    csv_file = open("data_distilled/distilled_bills_1NF.csv", "r")
+
+    seen = 0
+    for line in csv_file.readlines():
+
+        try:
+            row = line.split("\t")
+            sponsor = row[0]
+            result = row[1]
+            subjects = row[2][:-1].split("|") # we use the [:-1] because we don't want to include the new line
+            data = [sponsor, subjects]
+            predictor.train(data, result)
+
+            seen += 1
+
+            sys.stdout.flush()
+            sys.stdout.write("\rTrained %d/36610 bills" % seen)
+        except:
+            pass
+
+    print()
+
+    print(predictor.fc)
 
 def main():
     start = time.time()
 
     predictor = "maybe?"
 
-    if not os.path.isfile("postgres_predictor.bayes"):
+    if not os.path.isfile("distilled_predictor.bayes"):
         print("Generating...")
         predictor = naivebayes(get_features)
-        train_with_postgres(predictor)
+        train_with_distilled(predictor)
 
-        save_file = open("postgres_predictor.bayes", "wb+")
+        save_file = open("distilled_predictor.bayes", "wb+")
         pickle.dump(predictor, save_file)
     else:
-        save_file = open("postgres_predictor.bayes", "rb")
+        save_file = open("distilled_predictor.bayes", "rb")
         predictor = pickle.load(save_file)
         print("Loaded from file")
 
