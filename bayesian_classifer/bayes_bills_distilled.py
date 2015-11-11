@@ -2,6 +2,7 @@ import time
 import sys
 import os
 import pickle
+import math
 
 class classifier:
     def __init__(self, getfeatures, filename=None):
@@ -123,16 +124,15 @@ def get_features(data):
 
     return features
 
-def train_with_distilled(predictor):
-    csv_file = open("data_distilled/distilled_bills_1NF.csv", "r")
+def train_with_distilled(predictor, input_csv = "data_distilled/distilled_bills_1NF.csv"):
+    csv_file = open(input_csv, "r")
 
-    seen = 0
     for line in csv_file.readlines():
 
         try:
             row = line.split("\t")
             sponsor = row[0]
-            result = row[1]
+            result = int(row[1])
             subjects = row[2][:-1].split("|") # we use the [:-1] because we don't want to include the new line
             data = [sponsor, subjects]
             predictor.train(data, result)
@@ -140,11 +140,38 @@ def train_with_distilled(predictor):
             seen += 1
 
             sys.stdout.flush()
-            sys.stdout.write("\rTrained %d/36610 bills" % seen)
+            sys.stdout.write("\rTrained %d bills" % seen)
         except:
             pass
 
     print(predictor.fc)
+
+def predictOutcomes(predictor):
+    print("Predicting Outcomes for 113th congress...")
+    csv_file = open("data_distilled/data_distilled_113.csv", "r")
+
+    outcomes = [0,0]
+
+    seen = 0
+    for line in csv_file.readlines():
+
+
+        row = line.split("\t")
+        sponsor = row[0]
+        result = int(row[1])
+        subjects = row[2][:-1].split("|") # we use the [:-1] because we don't want to include the new line
+        data = [sponsor, subjects]
+        predicted = predictor.classify(data)
+
+        seen += 1
+        outcomes[0] += 1 if (result == predicted) else 0
+        outcomes[1] += 1
+
+        sys.stdout.flush()
+        sys.stdout.write("\rClassified %d bills... " % seen)
+    
+    print("Done!\n")
+    print("Accuracy --> %.5f%% for %d bills" % (100*outcomes[0]/outcomes[1], outcomes[1]))
 
 def main():
     start = time.time()
@@ -154,7 +181,8 @@ def main():
     if not os.path.isfile("distilled_predictor.bayes"):
         print("Generating...")
         predictor = naivebayes(get_features)
-        train_with_distilled(predictor)
+        train_with_distilled(predictor, "data_distilled/data_distilled_111.csv")
+        train_with_distilled(predictor, "data_distilled/data_distilled_112.csv")
 
         save_file = open("distilled_predictor.bayes", "wb+")
         pickle.dump(predictor, save_file)
@@ -162,6 +190,8 @@ def main():
         save_file = open("distilled_predictor.bayes", "rb")
         predictor = pickle.load(save_file)
         print("Loaded from file")
+
+    predictOutcomes(predictor)
 
 if __name__ == "__main__":
     main()
