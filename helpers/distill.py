@@ -2,6 +2,7 @@ from __future__ import print_function
 import os
 import json
 import csv
+import sys
 
 '''
     The Basic ERD for bills (at least for our purposes) is as follows
@@ -13,14 +14,14 @@ import csv
 def process_states_simple(status):
     return str(1 if "ENACTED" in status else 0)
 
-def distill_3NF():
-    bill_csv =  open('data_distilled/distilled_bills.csv', 'w')
+def distill_3NF(path, out = 'data_distilled/distilled_bills_subjects.csv'):
+    bill_csv =  open(out, 'w')
     bill_csv_writer = csv.writer(bill_csv, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
 
-    bill_subject_csv =  open('data_distilled/distilled_bills_subjects.csv', 'w')
+    bill_subject_csv =  open(out, 'w')
     bill_subject_csv_writer = csv.writer(bill_subject_csv, delimiter='\t', quoting=csv.QUOTE_MINIMAL)
 
-    for path, dirs, files in os.walk("data"):
+    for path, dirs, files in os.walk(path):
         for data_file in files:
             bill_path = path + "/" + data_file
 
@@ -41,10 +42,10 @@ def distill_3NF():
                 # this is the case of malformed JSON
                 pass
 
-def distill_1NF():
-    bill_csv =  open('data_distilled/distilled_bills_1NF.csv', 'w')
+def distill_1NF(path, out = 'data_distilled/distilled_bills_1NF.csv'):
+    bill_csv =  open(out, 'w')
 
-    for path, dirs, files in os.walk("data"):
+    for path, dirs, files in os.walk(path):
         for data_file in files:
             bill_path = path + "/" + data_file
 
@@ -71,4 +72,4 @@ def distill_1NF():
 
     bill_csv.close()
 
-distill_1NF()
+distill_1NF(sys.argv[1], sys.argv[2])
