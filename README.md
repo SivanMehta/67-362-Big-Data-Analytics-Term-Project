@@ -26,34 +26,28 @@ You can run a Bayesian classifer based on bills via the following command:
 $ python3 bayesian_classifier/bayes_bills.py
 ```
 
-This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 11/10/2015, we can predict whether or not a bill will be enacted into law with **an accuracy of 97.12%**
+This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 11/10/2015, we can predict whether or not a bill will be enacted into law with **an accuracy of 96.87%**
 
 The example output will be as follows:
 
 ```
-$ python3 bayesian_classifer/bayes_bills.py
-Creating Classifier...
-	Generating...
-	Training classifier...
-		trained 13675/13675 bills... finished data/bills_111
-		trained 12299/12299 bills... finished data/bills_112
-		--> done training!
+$ python3 bayesian_classifer/bayes_bills_distilled.py
+Generating...
 Predicting Outcomes for 113th congress...
-	classified bill 11203/11203...Done!
+Classified 1764 bills... Done!
 
-Accuracy --> 97.12325% for 10637 bills
+Accuracy --> 96.88209% for 1764 bills
 ```
 
-However, if you have run the classifier in the past, the program will not re-train the classifer, but rather load it from a file called `predictor.bayes`
+However, if you have run the classifier in the past, the program will not re-train the classifer, but rather load it from a file called `distilled_predictor.bayes`
 
 ```
-$ python3 bayesian_classifer/bayes_bills.py
-Creating Classifier...
-	Loaded from file
+$ python3 bayesian_classifer/bayes_bills_distilled.py
+Loaded from file
 Predicting Outcomes for 113th congress...
-	classified bill 10637/10637...Done!
+Classified 1764 bills... Done!
 
-Accuracy --> 97.12325% for 10637 bills
+Accuracy --> 96.88209% for 1764 bills
 ```
 
 #### Data Analysis

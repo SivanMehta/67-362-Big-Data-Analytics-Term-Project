@@ -143,9 +143,7 @@ def train_with_distilled(predictor, input_csv = "data_distilled/distilled_bills_
             sys.stdout.write("\rTrained %d bills" % seen)
         except:
             pass
-
-    print(predictor.fc)
-
+            
 def predictOutcomes(predictor):
     print("Predicting Outcomes for 113th congress...")
     csv_file = open("data_distilled/data_distilled_113.csv", "r")
