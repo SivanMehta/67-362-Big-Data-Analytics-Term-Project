@@ -21,21 +21,14 @@
 </head>
 <h1 id="predicting-congress">Predicting Congress</h1>
 <p>This project uses data from <a href="https://www.govtrack.us/developers/data">here</a> and <a href="https://github.com/unitedstates/congress">here</a> to attempt to predict Congressional results.</p>
-<p>Currently, I am just exploring the data set. Here are some things that I am looking at right now:</p>
-<ul>
-<li>What type of bills get passed?</li>
-<li>Who is likely to sign a certain bill?</li>
-<li>What type of bill would theoretically have the best chance of getting passed?</li>
-</ul>
+<p>As of 11/11/2015, we can predict whether or not a bill will be enacted into law with <strong>an accuracy of 96.88%</strong></p>
 <h2 id="requirements">Requirements</h2>
-<pre class="shell"><code>$ python3 --version ; pandoc --version
+<pre><code>$ python3 --version ; pandoc --version
 Python 3.5.0a1
 pandoc 1.15.0.6</code></pre>
 <h2 id="usage">Usage</h2>
-<h4 id="classification">Classification</h4>
-<p>You can run a Bayesian classifer based on bills via the following command:</p>
-<pre class="shell"><code>$ python3 bayesian_classifier/bayes_bills.py</code></pre>
-<p>This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress. As of 11/10/2015, we can predict whether or not a bill will be enacted into law with <strong>an accuracy of 96.88%</strong></p>
+<p>I recommend using the <code>bayesian_classifier</code> module, which contains both a normal version and a distilled version. They do the same thing, but run off two different datasets. The distilled version comes in this repo, you have to download the more bloated version (<code>~600MB</code>), by using the command provided when you try to run the file <code>bayesian_classifer/bayes_bills.py</code>.</p>
+<p>You can run the distilled classifer based on bills via the following command. This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress.</p>
 <p>The example output will be as follows:</p>
 <pre><code>$ python3 bayesian_classifer/bayes_bills_distilled.py
 Generating...
@@ -50,12 +43,6 @@ Predicting Outcomes for 113th congress...
 Classified 1764 bills... Done!
 
 Accuracy --&gt; 96.88209% for 1764 bills</code></pre>
-<h4 id="data-analysis">Data Analysis</h4>
-<p>There is <em>some</em> analytics built in here. You can find the 10 top most passed subjects in all the bills by running the following command:</p>
-<pre class="shell"><code>$ python3 demo.py
-loading files...
-Seen 42952 documents    Done</code></pre>
-<p>This will generate a summary that is piped to <code>report.csv</code>. This report shows the top 10 subjects to appear in the data, when ordered by proportion of bills that are passed.</p>
 <script type="text/javascript">
     var code_blocks = document.getElementsByTagName('pre');
     
