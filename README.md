@@ -2,7 +2,7 @@
 
 This project uses data from [here](https://www.govtrack.us/developers/data) and [here](https://github.com/unitedstates/congress) to attempt to predict Congressional results.
 
-As of 11/11/2015, we can predict whether or not a bill will be enacted into law with **an accuracy of 96.88%**
+As of 11/12/2015, we can predict whether or not a bill will be enacted into law with **an accuracy of 97.21%**
 
 
 ## Requirements
@@ -26,9 +26,9 @@ The example output will be as follows:
 $ python3 bayesian_classifer/bayes_bills_distilled.py
 Generating...
 Predicting Outcomes for 113th congress...
-Classified 1764 bills... Done!
+Classified 10615 bills... Done!
 
-Accuracy --> 96.88209% for 1764 bills
+Accuracy --> 97.21149% for 10615 bills
 ```
 
 However, if you have run the classifier in the past, the program will not re-train the classifer, but rather load it from a file called `distilled_predictor.bayes`
@@ -37,7 +37,7 @@ However, if you have run the classifier in the past, the program will not re-tra
 $ python3 bayesian_classifer/bayes_bills_distilled.py
 Loaded from file
 Predicting Outcomes for 113th congress...
-Classified 1764 bills... Done!
+Classified 10615 bills... Done!
 
-Accuracy --> 96.88209% for 1764 bills
+Accuracy --> 97.21149% for 10615 bills
 ```

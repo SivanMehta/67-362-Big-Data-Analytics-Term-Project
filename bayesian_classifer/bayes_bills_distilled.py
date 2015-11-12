@@ -153,17 +153,19 @@ def predictOutcomes(predictor):
     seen = 0
     for line in csv_file.readlines():
 
+        try:
+            row = line.split("\t")
+            sponsor = row[0]
+            result = int(row[1])
+            subjects = row[2][:-1].split("|") # we use the [:-1] because we don't want to include the new line
+            data = [sponsor, subjects]
+            predicted = predictor.classify(data)
 
-        row = line.split("\t")
-        sponsor = row[0]
-        result = int(row[1])
-        subjects = row[2][:-1].split("|") # we use the [:-1] because we don't want to include the new line
-        data = [sponsor, subjects]
-        predicted = predictor.classify(data)
-
-        seen += 1
-        outcomes[0] += 1 if (result == predicted) else 0
-        outcomes[1] += 1
+            seen += 1
+            outcomes[0] += 1 if (result == predicted) else 0
+            outcomes[1] += 1
+        except:
+            pass
 
         sys.stdout.flush()
         sys.stdout.write("\rClassified %d bills... " % seen)
