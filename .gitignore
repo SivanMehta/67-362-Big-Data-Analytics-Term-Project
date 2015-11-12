@@ -5,4 +5,4 @@ data/
 .DS_Store
 *.bayes
 helpers/test.py
-#.tsv
+*.tsv
