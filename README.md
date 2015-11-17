@@ -15,7 +15,7 @@ pandoc 1.15.0.6
 
 ## Usage
 
-I recommend using the `bayesian_classifier` module, which contains both a normal version and a distilled version. They do the same thing, but run off two different datasets. The distilled version comes in this repo, you have to download the more bloated version (`~600MB`), by using the command provided when you try to run the file `bayesian_classifer/bayes_bills.py`.
+I recommend using the `bayesian_classifier` module, which contains both a normal version and a distilled version. They do the same thing, but run off two different datasets. The `collab_filter` module was never finished by my partner :sweat:. The distilled version comes in this repo, you have to download the more bloated version (`~600MB`), by using the command provided when you try to run the file `bayesian_classifer/bayes_bills.py`.
 
 
 You can run the distilled classifer based on bills via the following command. This will train a classifer based off of the bills processed during the 111th and 112th congress, with the goal of trying to predict the results of 113th congress.
